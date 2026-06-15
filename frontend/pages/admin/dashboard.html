@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AL SEGER Dashboard</title>
+
+ <link rel="stylesheet" href="../../css/admin.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+  <!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+  <div class="sidebar-logo">
+
+    <img src="../../assets/images/logo1.png" alt="Logo">
+
+    <h2>AL SEGER</h2>
+
+  </div>
+
+  <ul class="sidebar-menu">
+
+    <li class="active">
+      <a href="dashboard.html">
+        <i class="fa-solid fa-chart-line"></i>
+        Dashboard
+      </a>
+    </li>
+
+    <li>
+      <a href="applicants.html">
+        <i class="fa-solid fa-users"></i>
+        Applicants
+      </a>
+    </li>
+
+    <li>
+      <a href="training.html">
+        <i class="fa-solid fa-graduation-cap"></i>
+        Training
+      </a>
+    </li>
+
+   <li class="has-submenu">
+  <a href="#" id="countriesToggle">
+    <i class="fa-solid fa-earth-africa"></i>
+    Countries
+    
+  </a>
+
+  <ul class="submenu" id="countriesMenu">
+    <li><a href="#">Qatar</a></li>
+    <li><a href="#">Saudi Arabia</a></li>
+    <li><a href="#">Jordan</a></li>
+    <li><a href="#">Dubai</a></li>
+    <li><a href="#">Kuwait</a></li>
+    <li><a href="#">Europe</a></li>
+  </ul>
+</li>
+
+    <li>
+      <a href="messages.html">
+        <i class="fa-solid fa-envelope"></i>
+        Messages
+      </a>
+    </li>
+
+    <li>
+      <a href="reports.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        Reports
+      </a>
+    </li>
+
+    <li>
+      <a href="settings.html">
+        <i class="fa-solid fa-gear"></i>
+        Settings
+      </a>
+    </li>
+
+  </ul>
+<button onclick="logout()">
+  Logout
+</button>
+</aside>
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+ <div class="mobile-menu-btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    <div class="topbar">
+
+      <div>
+
+        <h1>Dashboard</h1>
+
+        <p>Recruitment Management System</p>
+
+      </div>
+
+      <div class="topbar-right">
+
+        <div class="notification">
+
+          <i class="fa-solid fa-bell"></i>
+
+          <span>5</span>
+
+        </div>
+
+        <div class="admin-profile">
+
+         <img src="../../assets/images/logo.jpeg" alt="Logo">
+
+          <div>
+            <h4>Administrator</h4>
+            <span>Super Admin</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+
+        <i class="fa-solid fa-users"></i>
+
+        <h2>1,542</h2>
+
+        <p>Total Applicants</p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <i class="fa-solid fa-clock"></i>
+
+        <h2>231</h2>
+
+        <p>Pending Review</p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <h2>1,189</h2>
+
+        <p>Approved</p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <i class="fa-solid fa-circle-xmark"></i>
+
+        <h2>122</h2>
+
+        <p>Rejected</p>
+
+      </div>
+
+    </div>
+
+    <!-- RECENT APPLICATIONS -->
+
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <h3>Recent Applications</h3>
+
+        <button>View All</button>
+
+      </div>
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Ahmed Ali</td>
+            <td>Saudi Arabia</td>
+            <td><span class="pending">Pending</span></td>
+            <td>Today</td>
+          </tr>
+
+          <tr>
+            <td>Fatima Hassan</td>
+            <td>Qatar</td>
+            <td><span class="approved">Approved</span></td>
+            <td>Yesterday</td>
+          </tr>
+
+          <tr>
+            <td>Mohammed Yusuf</td>
+            <td>UAE</td>
+            <td><span class="rejected">Rejected</span></td>
+            <td>2 Days Ago</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </main>
+
+</div>
+<script src="...auth.js"></script>
+<script src="../../js/admin.js"></script>
+<script src="../../js/applicant.js"></script>
+</body>
+</html>

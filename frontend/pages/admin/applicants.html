@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Applicants | AL SEGER Admin</title>
+
+ <link rel="stylesheet" href="../../css/admin.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+      <img src="../logo.jpeg" alt="Logo">
+
+      <h2>AL SEGER</h2>
+
+    </div>
+
+    <ul class="sidebar-menu">
+
+      <li>
+        <a href="dashboard.html">
+          <i class="fa-solid fa-chart-line"></i>
+          Dashboard
+        </a>
+      </li>
+
+      <li class="active">
+        <a href="applicants.html">
+          <i class="fa-solid fa-users"></i>
+          Applicants
+        </a>
+      </li>
+
+      <li>
+        <a href="training.html">
+          <i class="fa-solid fa-graduation-cap"></i>
+          Training
+        </a>
+      </li>
+
+   <li class="has-submenu">
+  <a href="#" id="countriesToggle">
+    <i class="fa-solid fa-earth-africa"></i>
+    Countries
+    
+  </a>
+
+  <ul class="submenu" id="countriesMenu">
+    <li><a href="#">Qatar</a></li>
+    <li><a href="#">Saudi Arabia</a></li>
+    <li><a href="#">Jordan</a></li>
+    <li><a href="#">Dubai</a></li>
+    <li><a href="#">Kuwait</a></li>
+    <li><a href="#">Europe</a></li>
+  </ul>
+
+      <li>
+        <a href="messages.html">
+          <i class="fa-solid fa-envelope"></i>
+          Messages
+        </a>
+      </li>
+
+      <li>
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-pie"></i>
+          Reports
+        </a>
+      </li>
+
+      <li>
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          Settings
+        </a>
+      </li>
+
+    </ul>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+      <div class="mobile-menu-btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <div>
+
+        <h1>Applicants Management</h1>
+
+        <p>
+          Manage and review all applications
+        </p>
+
+      </div>
+<button
+  class="add-applicant-btn"
+  id="openApplicantModal"
+>
+  <i class="fa-solid fa-plus"></i>
+  New Applicant
+</button>
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-section">
+
+      <div class="search-box">
+
+        <i class="fa-solid fa-search"></i>
+
+       <input
+  type="text"
+  id="applicantSearch"
+  name="applicant_search"
+  placeholder="Search applicants..."
+  autocomplete="off"
+/>
+
+      </div>
+
+    </div>
+
+    <!-- FILTERS -->
+
+    <div class="filter-buttons">
+
+      <button class="filter active-filter">
+        All
+      </button>
+
+      <button class="filter">
+        Pending
+      </button>
+
+      <button class="filter">
+        Approved
+      </button>
+
+      <button class="filter">
+        Rejected
+      </button>
+
+      <button class="filter">
+        Interview
+      </button>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+
+        <i class="fa-solid fa-users"></i>
+
+        <h2>1542</h2>
+
+        <p>Total Applicants</p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <i class="fa-solid fa-clock"></i>
+
+        <h2>231</h2>
+
+        <p>Pending</p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <i class="fa-solid fa-check"></i>
+
+        <h2>1189</h2>
+
+        <p>Approved</p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <i class="fa-solid fa-xmark"></i>
+
+        <h2>122</h2>
+
+        <p>Rejected</p>
+
+      </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="dashboard-card">
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>ID</th>
+
+              <th>Name</th>
+
+              <th>Phone</th>
+
+              <th>Country</th>
+
+              <th>Status</th>
+
+              <th>Actions</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+
+              <td>#1001</td>
+
+              <td>Ahmed Ali</td>
+
+              <td>+251912345678</td>
+
+              <td>Saudi Arabia</td>
+
+              <td>
+                <span class="pending">
+                  Pending
+                </span>
+              </td>
+
+              <td>
+
+                <a
+                  href="applicant-view.html"
+                  class="action-btn view-btn"
+                >
+                  View
+                </a>
+
+                <button class="action-btn approve-btn">
+                  Approve
+                </button>
+
+                <button class="action-btn reject-btn">
+                  Reject
+                </button>
+
+              </td>
+
+            </tr>
+
+            <tr>
+
+              <td>#1002</td>
+
+              <td>Fatima Hassan</td>
+
+              <td>+251911111111</td>
+
+              <td>Qatar</td>
+
+              <td>
+                <span class="approved">
+                  Approved
+                </span>
+              </td>
+
+              <td>
+
+                <a
+                  href="applicant-view.html"
+                  class="action-btn view-btn"
+                >
+                  View
+                </a>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+<div class="modal-overlay" id="applicantModal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>Add New Applicant</h2>
+    </div>
+
+   <form class="applicant-form">
+
+  <div class="form-grid">
+
+    <!-- NAME -->
+    <div class="form-group">
+  <label for="firstName">First Name</label>
+  <input
+    type="text"
+    id="firstName"
+    name="first_name"
+    autocomplete="given-name"
+  >
+</div>
+
+    <div class="form-group">
+      <label for="middleName">Middle Name</label>
+      <input type="text" id="middleName" name="middle_name">
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="last_name">
+    </div>
+
+    <!-- PERSONAL INFO -->
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob">
+    </div>
+
+    <div class="form-group">
+      <label for="birthPlace">Place of Birth</label>
+      <input type="text" id="birthPlace" name="birth_place">
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age">
+    </div>
+
+    <div class="form-group">
+      <label for="height">Height</label>
+      <input type="text" id="height" name="height">
+    </div>
+
+    <div class="form-group">
+      <label for="weight">Weight</label>
+      <input type="text" id="weight" name="weight">
+    </div>
+
+    <div class="form-group">
+      <label for="marital">Marital Status</label>
+      <select id="marital" name="marital_status">
+        <option>Single</option>
+        <option>Married</option>
+        <option>Divorced</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="religion">Religion</label>
+      <input type="text" id="religion" name="religion">
+    </div>
+
+    <div class="form-group">
+      <label for="nationality">Nationality</label>
+      <input type="text" id="nationality" name="nationality">
+    </div>
+
+    <!-- APPLICATION -->
+    <div class="form-group">
+      <label for="appNumber">Application Number</label>
+      <input type="text" id="appNumber" name="application_number">
+    </div>
+
+    <div class="form-group">
+      <label for="post">Post Applied For</label>
+      <input type="text" id="post" name="post_applied">
+    </div>
+
+    <div class="form-group">
+      <label for="contract">Contract Period</label>
+      <input type="text" id="contract" name="contract_period">
+    </div>
+
+    <div class="form-group">
+      <label for="salary">Monthly Salary</label>
+      <input type="text" id="salary" name="monthly_salary">
+    </div>
+
+    <div class="form-group">
+      <label for="education">Education</label>
+      <input type="text" id="education" name="education">
+    </div>
+
+    <!-- PASSPORT -->
+    <div class="form-group">
+      <label for="passport">Passport Number</label>
+      <input type="text" id="passport" name="passport_number">
+    </div>
+
+    <div class="form-group">
+      <label for="issuePlace">Issue Place</label>
+      <input type="text" id="issuePlace" name="issue_place">
+    </div>
+
+    <div class="form-group">
+      <label for="issueDate">Passport Issue Date</label>
+      <input type="date" id="issueDate" name="passport_issue_date">
+    </div>
+
+    <div class="form-group">
+      <label for="expiry">Passport Expiry Date</label>
+      <input type="date" id="expiry" name="passport_expiry">
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="form-group">
+      <label for="expPeriod">Experience Period</label>
+      <input type="text" id="expPeriod" name="experience_period">
+    </div>
+
+    <div class="form-group">
+      <label for="expCountry">Experience Country</label>
+      <input type="text" id="expCountry" name="experience_country">
+    </div>
+
+    <!-- LANGUAGES -->
+    <div class="form-group">
+      <label for="english">English Language</label>
+      <select id="english" name="english">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="arabic">Arabic Language</label>
+      <select id="arabic" name="arabic">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="french">French Language</label>
+      <select id="french" name="french">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+
+    <!-- JOB SKILLS -->
+    <div class="form-group">
+      <label for="elderly">Care of Elderly</label>
+      <select id="elderly" name="care_elderly">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="babysitter">Baby Sitter</label>
+      <select id="babysitter" name="babysitter">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cleaning">Cleaning</label>
+      <select id="cleaning" name="cleaning">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cooking">Cooking</label>
+      <select id="cooking" name="cooking">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+
+    <!-- COUNTRY + BROKER -->
+    <div class="form-group">
+      <label for="country">Select Country</label>
+<select
+  id="country"
+  name="country"
+  autocomplete="country-name"
+>
+  <option>Qatar</option>
+  <option>Saudi Arabia</option>
+  <option>Jordan</option>
+  <option>Dubai</option>
+  <option>Kuwait</option>
+  <option>Europe</option>
+</select>
+    </div>
+
+    <div class="form-group">
+      <label for="broker">Broker Name</label>
+      <input type="text" id="broker" name="broker_name">
+    </div>
+
+    <!-- CONTACT -->
+    <div class="form-group">
+     <label for="phone">Phone</label>
+<input
+  type="tel"
+  id="phone"
+  name="phone"
+  autocomplete="tel"
+  inputmode="tel"
+  placeholder="+251 912 345 678"
+/>
+    </div>
+
+    <div class="form-group">
+      <label for="familyPhone">Family Phone</label>
+      <input type="text" id="familyPhone" name="family_phone">
+    </div>
+
+    <!-- NOTE -->
+    <div class="form-group full-width">
+      <label for="note">Note</label>
+      <textarea id="note" name="note" rows="3"></textarea>
+    </div>
+
+    <!-- UPLOADS -->
+    <div class="form-group">
+      <label for="idCard">ID Card Photo</label>
+      <input type="file" id="idCard" name="id_card" accept="image/*">
+    </div>
+
+    <div class="form-group">
+      <label for="portrait">Portrait Photo</label>
+      <input type="file" id="portrait" name="portrait" accept="image/*">
+    </div>
+
+    <div class="form-group">
+      <label for="passportPhoto">Passport Photo</label>
+      <input type="file" id="passportPhoto" name="passport_photo" accept="image/*">
+    </div>
+
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="modal-actions">
+
+    <button type="button" class="cancel-btn">
+      Cancel
+    </button>
+
+    <button type="submit" class="save-btn">
+      Save Applicant
+    </button>
+
+  </div>
+
+</form>
+
+  </div>
+
+</div>
+
+<script src="../../js/admin.js"></script>
+<script src="../../js/applicant.js"></script>
+</body>
+</html>

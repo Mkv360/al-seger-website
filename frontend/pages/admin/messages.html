@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Messages | AL SEGER Admin</title>
+
+ <link rel="stylesheet" href="../../css/admin.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <img src="../logo.jpeg" alt="Logo">
+      <h2>AL SEGER</h2>
+    </div>
+
+    <ul class="sidebar-menu">
+
+      <li>
+        <a href="dashboard.html">
+          <i class="fa-solid fa-chart-line"></i>
+          Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a href="applicants.html">
+          <i class="fa-solid fa-users"></i>
+          Applicants
+        </a>
+      </li>
+
+      <li>
+        <a href="training.html">
+          <i class="fa-solid fa-graduation-cap"></i>
+          Training
+        </a>
+      </li>
+
+      <li class="has-submenu">
+        <a href="#" id="countriesToggle">
+          <i class="fa-solid fa-earth-africa"></i>
+          Countries
+        </a>
+
+        <ul class="submenu" id="countriesMenu">
+          <li><a href="#">Qatar</a></li>
+          <li><a href="#">Saudi Arabia</a></li>
+          <li><a href="#">Jordan</a></li>
+          <li><a href="#">Dubai</a></li>
+          <li><a href="#">Kuwait</a></li>
+          <li><a href="#">Europe</a></li>
+        </ul>
+      </li>
+
+      <li class="active">
+        <a href="messages.html">
+          <i class="fa-solid fa-envelope"></i>
+          Messages
+        </a>
+      </li>
+
+      <li>
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-pie"></i>
+          Reports
+        </a>
+      </li>
+
+      <li>
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          Settings
+        </a>
+      </li>
+
+    </ul>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+
+      <div>
+        <h1>Messages</h1>
+        <p>Incoming messages from website users</p>
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <i class="fa-solid fa-envelope"></i>
+        <h2 id="totalMessages">0</h2>
+        <p>Total Messages</p>
+      </div>
+
+      <div class="stat-card">
+        <i class="fa-solid fa-clock"></i>
+        <h2 id="newMessages">0</h2>
+        <p>New Messages</p>
+      </div>
+
+    </div>
+
+    <!-- MESSAGES TABLE -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+        <h3>All Messages</h3>
+        <button onclick="clearMessages()">Clear All</button>
+      </div>
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Country</th>
+              <th>Message</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="messagesTable">
+            <!-- JS loads messages here -->
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>

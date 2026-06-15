@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>AL SEGER TRADING PLC</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/theme.css">
+
+  <!-- ICONS -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+
+  <!-- ========================= -->
+  <!-- NAVBAR -->
+  <!-- ========================= -->
+
+  <header class="navbar">
+
+    <div class="logo-area">
+
+      <img src="../assets/images/al segher.png.jpg.png" alt="AL SEGER Logo" class="logo">
+      <div class="logo-text">
+        <h2 data-i18n="logo.name">AL SEGER</h2>
+        <span data-i18n="logo.sub">TRADING PLC</span>
+        <span data-i18n="logo.tagline">Your Trusted Ethiopian Employment Agency</span>
+      </div>
+
+    </div>
+
+    <nav class="nav-links">
+
+      <a href="#home" data-translate="nav.home" data-i18n="nav.home">Home</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#achievements" data-i18n="nav.achievements">Achievements</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+
+     <div class="language-dropdown">
+
+ <button id="languageBtn" class="language-btn">
+    <i class="fas fa-globe"></i>
+   
+</button>
+
+  <div id="languageMenu" class="language-menu">
+
+    <button class="lang-option" data-lang="en">
+      English
+    </button>
+
+    <button class="lang-option" data-lang="am">
+      አማርኛ
+    </button>
+
+    <button class="lang-option" data-lang="om">
+      Afaan Oromo
+    </button>
+
+  </div>
+
+
+</div>
+      <button id="themeToggle" class="theme-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+
+      <button id="loginBtn" class="nav-auth-btn" data-i18n="nav.login">
+        Login
+      </button>
+
+      <button id="registerBtn" class="nav-auth-btn register" data-i18n="nav.register">
+        Register
+      </button>
+
+    </nav>
+
+    <!-- MOBILE MENU -->
+
+    <div class="mobile-menu">
+
+      <a href="#home" data-i18n="nav.home">Home</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#achievements" data-i18n="nav.achievements">Achievements</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+
+      <div class="mobile-controls">
+
+        <select id="mobileLanguageSelector" class="language-select">
+          <option value="en">English</option>
+          <option value="am">አማርኛ</option>
+          <option value="om">Afaan Oromo</option>
+        </select>
+
+        <button id="mobileThemeToggle" class="theme-btn">
+          <i class="fas fa-moon"></i>
+        </button>
+
+      </div>
+
+      <div class="mobile-auth">
+
+        <button id="mobileLoginBtn" class="mobile-login-btn" data-i18n="nav.login">
+          Login
+        </button>
+
+        <button id="mobileRegisterBtn" class="mobile-register-btn" data-i18n="nav.register">
+          Register
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="menu-btn">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+  </header>
+
+
+
+  <!-- ========================= -->
+  <!-- HERO SECTION -->
+  <!-- ========================= -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+      <img src="../assets/images/al sheger.png.jpg.png" alt="AL SEGER Logo" class="hero-logo">
+
+      <!--
+        NOTE: hero.headline contains HTML line breaks.
+        Your language.js must set element.innerHTML (not textContent) for this key.
+        en.json value: "AL SEGER <br> TRADING PLC <br> FOR EMP AGENT"
+      -->
+      <h1>
+        AL SEGER <br>
+       
+        FOR EMP AGENT
+      </h1>
+
+      <p data-i18n="hero.subtitle">
+        Trusted Ethiopian Employment Agency Connecting Skilled Workers
+        to Opportunities Across the Middle East.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#contact" class="btn primary-btn" data-i18n="hero.applyBtn">
+          Apply Now
+        </a>
+
+        <a href="#about" class="btn secondary-btn" data-i18n="hero.learnMore">
+          Learn More
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- ABOUT SECTION -->
+  <!-- ========================= -->
+
+  <section class="about section" id="about">
+
+    <div class="section-title">
+
+      <span data-i18n="about.tagline">WHO WE ARE</span>
+
+      <h2 data-i18n="about.title">About Our Company</h2>
+
+    </div>
+
+    <div class="about-container">
+
+      <div class="about-image">
+
+        <img src="../assets/images/al sheger.png.jpg.png">
+
+      </div>
+
+      <div class="about-text">
+
+        <h3 data-i18n="about.heading">
+          Building Trusted International Employment Opportunities
+        </h3>
+
+        <p data-i18n="about.para1">
+          AL SEGER TRADING PLC is a professional Ethiopian employment
+          agency dedicated to training and connecting skilled workers
+          with reliable opportunities in Middle Eastern countries.
+        </p>
+
+        <p data-i18n="about.para2">
+          We focus on professionalism, safety, legal recruitment,
+          and preparing workers with the skills and confidence needed
+          for international employment success.
+        </p>
+
+        <div class="about-features">
+
+          <div class="feature">
+            <i class="fa-solid fa-check"></i>
+            <span data-i18n="about.feature1">Licensed Recruitment Agency</span>
+          </div>
+
+          <div class="feature">
+            <i class="fa-solid fa-check"></i>
+            <span data-i18n="about.feature2">Professional Worker Training</span>
+          </div>
+
+          <div class="feature">
+            <i class="fa-solid fa-check"></i>
+            <span data-i18n="about.feature3">Trusted International Partners</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- VISION MISSION SECTION -->
+  <!-- ========================= -->
+
+  <section class="vision section">
+
+    <div class="section-title">
+
+      <span data-i18n="vision.tagline">OUR FOUNDATION</span>
+
+      <h2 data-i18n="vision.title">Vision, Mission &amp; Integrity</h2>
+
+    </div>
+
+    <div class="vision-grid">
+
+      <!-- CARD -->
+
+      <div class="vision-card">
+
+        <div class="vision-icon">
+          <i class="fa-solid fa-eye"></i>
+        </div>
+
+        <h3 data-i18n="vision.visionTitle">Our Vision</h3>
+
+        <p data-i18n="vision.visionText">
+          To become one of Ethiopia's most trusted and respected
+          international recruitment agencies by empowering workers
+          with global employment opportunities.
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="vision-card">
+
+        <div class="vision-icon">
+          <i class="fa-solid fa-bullseye"></i>
+        </div>
+
+        <h3 data-i18n="vision.missionTitle">Our Mission</h3>
+
+        <p data-i18n="vision.missionText">
+          To provide professional recruitment, training,
+          and legal overseas employment services while
+          ensuring worker safety, preparation, and success.
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="vision-card">
+
+        <div class="vision-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <h3 data-i18n="vision.integrityTitle">Integrity</h3>
+
+        <p data-i18n="vision.integrityText">
+          We believe in honesty, transparency, professionalism,
+          and ethical recruitment practices in every stage
+          of our service.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- GALLERY SECTION -->
+  <!-- ========================= -->
+
+  <section class="gallery section">
+
+   <div class="gallery-grid">
+
+  <!-- MAIN OFFICE -->
+
+  <a href="main-office.html" class="gallery-card">
+
+    <img src="../assets/images/al segher.png.jpg.png" alt="Office">
+
+    <div class="gallery-overlay">
+      <h3>Main Office <br> AL SEGER</h3>
+    </div>
+
+  </a>
+
+  <!-- FANOS COC -->
+
+  <a href="fanos-coc.html" class="gallery-card">
+
+    <img src="../assets/images/fanos (1).jpeg" alt="Training">
+
+    <div class="gallery-overlay">
+      <h3>Training Center <br> FANOS COC</h3>
+    </div>
+
+  </a>
+
+  <!-- PROFESSIONAL WORKSPACE -->
+
+  <a href="professional-workspace.html" class="gallery-card">
+
+    <img src="../assets/images/al segher.png.jpg.png" alt="Workspace">
+
+    <div class="gallery-overlay">
+      <h3>Professional Workspace</h3>
+    </div>
+
+  </a>
+
+  <!-- WORKER PREPARATION -->
+
+  <a href="worker-preparation.html" class="gallery-card">
+
+    <img src="../assets/images/al segher.png.jpg.png" alt="Worker Preparation">
+
+    <div class="gallery-overlay">
+      <h3>Worker Preparation</h3>
+    </div>
+
+  </a>
+
+</div>
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- SERVICES SECTION -->
+  <!-- ========================= -->
+
+  <section class="services section" id="services">
+
+    <div class="section-title">
+
+      <span data-i18n="services.tagline">OUR SERVICES</span>
+
+      <h2 data-i18n="services.title">What We Provide</h2>
+
+    </div>
+
+    <div class="services-grid">
+
+      <!-- CARD -->
+
+      <div class="service-card">
+
+        <i class="fa-solid fa-briefcase"></i>
+
+        <h3 data-i18n="services.overseasTitle">Overseas Employment</h3>
+
+        <p data-i18n="services.overseasText">
+          Connecting Ethiopian workers with trusted employers abroad.
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="service-card">
+
+        <i class="fa-solid fa-passport"></i>
+
+        <h3 data-i18n="services.visaTitle">Visa Assistance</h3>
+
+        <p data-i18n="services.visaText">
+          Complete support for travel and visa processing procedures.
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="service-card">
+
+        <i class="fa-solid fa-graduation-cap"></i>
+
+        <h3 data-i18n="services.trainingTitle">Training Programs</h3>
+
+        <p data-i18n="services.trainingText">
+          Preparing workers with practical and professional skills.
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="service-card">
+
+        <i class="fa-solid fa-file"></i>
+
+        <h3 data-i18n="services.docsTitle">Documentation</h3>
+
+        <p data-i18n="services.docsText">
+          Assistance with all legal and recruitment documentation.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- ACHIEVEMENTS -->
+  <!-- ========================= -->
+
+  <section class="achievements section" id="achievements">
+
+    <div class="section-title">
+
+      <span data-i18n="achievements.tagline">OUR SUCCESS</span>
+
+      <h2 data-i18n="achievements.title">Achievements</h2>
+
+    </div>
+
+    <div class="achievement-grid">
+
+      <div class="achievement-card">
+        <h2>5000+</h2>
+        <p data-i18n="achievements.workersLabel">Workers Sent Abroad</p>
+      </div>
+
+      <div class="achievement-card">
+        <h2>8+</h2>
+        <p data-i18n="achievements.yearsLabel">Years Experience</p>
+      </div>
+
+      <div class="achievement-card">
+        <h2>5+</h2>
+        <p data-i18n="achievements.countriesLabel">Partner Countries</p>
+      </div>
+
+      <div class="achievement-card">
+        <h2>95%</h2>
+        <p data-i18n="achievements.satisfactionLabel">Client Satisfaction</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- TRUST SECTION -->
+  <!-- ========================= -->
+
+  <section class="trust section">
+
+    <div class="section-title">
+
+      <span data-i18n="trust.tagline">WHY TRUST US</span>
+
+      <h2 data-i18n="trust.title">Professional &amp; Reliable</h2>
+
+    </div>
+
+    <div class="trust-container">
+
+      <div class="trust-box">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <h3 data-i18n="trust.legalTitle">Legal Recruitment</h3>
+
+        <p data-i18n="trust.legalText">
+          We follow official and legal international recruitment procedures.
+        </p>
+
+      </div>
+
+      <div class="trust-box">
+
+        <i class="fa-solid fa-earth-africa"></i>
+
+        <h3 data-i18n="trust.globalTitle">Global Opportunities</h3>
+
+        <p data-i18n="trust.globalText">
+          Strong partnerships with employers across Middle Eastern countries.
+        </p>
+
+      </div>
+
+      <div class="trust-box">
+
+        <i class="fa-solid fa-users"></i>
+
+        <h3 data-i18n="trust.teamTitle">Experienced Team</h3>
+
+        <p data-i18n="trust.teamText">
+          Dedicated professionals helping workers throughout the process.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- CONTACT SECTION -->
+  <!-- ========================= -->
+
+  <section class="contact section" id="contact">
+
+    <div class="section-title">
+
+      <span data-i18n="contact.tagline">CONTACT US</span>
+
+      <h2 data-i18n="contact.title">Get In Touch</h2>
+
+    </div>
+
+    <div class="contact-container">
+
+      <!-- LEFT -->
+
+      <div class="contact-info">
+
+        <div class="contact-item">
+
+          <i class="fa-solid fa-phone"></i>
+
+          <div>
+            <h4 data-i18n="contact.phoneLabel">Phone</h4>
+            <p>+251 XXX XXX XXX</p>
+          </div>
+
+        </div>
+
+        <div class="contact-item">
+
+          <i class="fa-solid fa-envelope"></i>
+
+          <div>
+            <h4 data-i18n="contact.emailLabel">Email</h4>
+            <p>info@alseger.com</p>
+          </div>
+
+        </div>
+
+        <div class="contact-item">
+
+          <i class="fa-solid fa-location-dot"></i>
+
+          <div>
+            <h4 data-i18n="contact.locationLabel">Location</h4>
+            <p data-i18n="contact.locationValue">Addis Ababa, Ethiopia</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <form class="contact-form" id="contactForm">
+
+        <input
+          type="text"
+          id="contactName"
+          name="name"
+          placeholder="Your Name"
+          data-i18n-placeholder="contact.namePlaceholder"
+          autocomplete="name"
+          required
+        >
+
+        <input
+          type="tel"
+          id="contactPhone"
+          name="phone"
+          placeholder="Phone Number"
+          data-i18n-placeholder="contact.phonePlaceholder"
+          autocomplete="tel"
+          required
+        >
+
+        <input
+          type="text"
+          id="contactCountry"
+          name="country"
+          placeholder="Country Interested In"
+          data-i18n-placeholder="contact.countryPlaceholder"
+          autocomplete="country-name"
+        >
+
+        <textarea
+          id="contactMessage"
+          name="message"
+          rows="6"
+          placeholder="Your Message"
+          data-i18n-placeholder="contact.messagePlaceholder"
+          autocomplete="off"
+        ></textarea>
+
+        <button type="submit" data-i18n="contact.send">
+          Send Message
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- FOOTER -->
+  <!-- ========================= -->
+
+  <footer class="footer">
+
+    <img src="../assets/images/al segher.png.jpg.png" alt="AL SEGER Logo">
+
+    <h2 data-i18n="footer.companyName">AL SEGER TRADING PLC</h2>
+
+    <p data-i18n="footer.tagline">
+      Trusted Ethiopian Employment Agency for International Opportunities.
+    </p>
+
+    <div class="socials">
+
+      <a href="#">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+
+      <a href="#">
+        <i class="fa-brands fa-telegram"></i>
+      </a>
+
+      <a href="#">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+
+    </div>
+
+    <span data-i18n="footer.copyright">
+      © 2026 AL SEGER TRADING PLC. All Rights Reserved.
+    </span>
+
+  </footer>
+
+
+
+  <!-- ========================= -->
+  <!-- LOGIN MODAL -->
+  <!-- ========================= -->
+
+  <div id="loginModal" class="modal">
+
+    <div class="modal-content">
+
+      <span class="close-modal">&times;</span>
+
+      <h2 data-i18n="auth.loginTitle">Login</h2>
+
+      <form id="loginForm">
+
+        <input
+          type="text"
+          id="loginIdentifier"
+          placeholder="Phone or Email"
+          
+          required
+        >
+
+        <div class="password-wrapper">
+
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+          
+            required
+          >
+
+          <i class="fas fa-eye toggle-password"></i>
+
+        </div>
+
+        <div class="error-message" id="loginError"></div>
+
+        <a href="#" class="forgot-link" data-i18n="auth.forgotPassword">
+          Forgot Password?
+        </a>
+
+        <button type="submit" data-i18n="auth.loginBtn">
+          Login
+        </button>
+
+        <p>
+          <span data-i18n="auth.noAccount">Don't have an account?</span>
+          <a href="#" id="switchToRegister" data-i18n="auth.registerLink">
+            Register
+          </a>
+        </p>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ========================= -->
+  <!-- REGISTER MODAL -->
+  <!-- ========================= -->
+
+  <div id="registerModal" class="modal">
+
+    <div class="modal-content">
+
+      <span class="close-modal">&times;</span>
+
+      <h2 data-i18n="auth.registerTitle">Create Account</h2>
+
+      <form id="registerForm">
+
+        <input
+          type="text"
+          id="fullName"
+          placeholder="Full Name"
+        
+          required
+        >
+
+        <input
+          type="text"
+          id="phoneOrEmail"
+          placeholder="Phone or Email"
+      
+          required
+        >
+
+        <select id="gender">
+          <option value="" data-i18n="auth.selectGender">Select Gender</option>
+          <option value="Male" data-i18n="auth.male">Male</option>
+          <option value="Female" data-i18n="auth.female">Female</option>
+        </select>
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+         
+          required
+        >
+
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm Password"
+          
+          required
+        >
+
+        <div id="passwordStrength"></div>
+
+        <div id="registerError"></div>
+
+        <button type="submit" data-i18n="auth.registerBtn">
+          Register
+        </button>
+
+        <p>
+          <span data-i18n="auth.haveAccount">Already have an account?</span>
+          <a href="#" id="switchToLogin" data-i18n="auth.loginLink">
+            Login
+          </a>
+        </p>
+
+      </form>
+
+    </div>
+
+  </div>
+
+<!-- IMAGE VIEWER -->
+<div id="imageViewer" class="image-viewer">
+
+  <span class="viewer-close">&times;</span>
+
+  <img id="viewerImage" src="" alt="Preview">
+
+</div>
+
+  <!-- JS -->
+  <script src="../js/language.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/login.js"></script>
+  <script src="../js/register.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/message.js"></script>
+
+</body>
+</html>

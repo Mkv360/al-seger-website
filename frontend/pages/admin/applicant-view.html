@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Applicant CV — AL SEGER</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link rel="stylesheet" href="../../css/view.css"/>
+<!-- html2canvas for image export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   RESET & VARIABLES
+═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:        #0c2d5a;
+  --navy-mid:    #1a4a8a;
+  --navy-light:  #e8eef8;
+  --gold:        #b8922a;
+  --gold-light:  #f5e9cc;
+  --text:        #111827;
+  --muted:       #6b7280;
+  --border:      #d1d9e6;
+  --bg-page:     #dde3ef;
+  --white:       #ffffff;
+  --red:         #dc2626;
+  --green:       #15803d;
+  --whatsapp:    #25D366;
+}
+
+body {
+  font-family: 'DM Sans', Arial, sans-serif;
+  background: var(--bg-page);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ACTION BAR  (hidden on print)
+═══════════════════════════════════════════════════════════════ */
+.action-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--navy);
+  padding: 9px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.45);
+}
+
+.bar-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar-title span {
+  color: var(--gold-light);
+  opacity: .7;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: .5px;
+}
+
+.btn {
+  padding: 7px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity .18s, transform .12s;
+  white-space: nowrap;
+}
+.btn:hover { opacity: .88; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn-back   { background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.25); }
+.btn-pdf    { background: var(--red); color: #fff; }
+.btn-img    { background: var(--green); color: #fff; }
+.btn-share  { background: var(--whatsapp); color: #fff; }
+.btn-approve{ background: #1d4ed8; color: #fff; }
+
+/* ═══════════════════════════════════════════════════════════════
+   CV CONTAINER
+═══════════════════════════════════════════════════════════════ */
+.cv-page {
+  margin: 68px auto 48px;
+  width: 880px;
+  background: #fff;
+  box-shadow: 0 6px 32px rgba(0,0,0,.18);
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.cv-header {
+  display: grid;
+  grid-template-columns: 155px 1fr 210px;
+  border-bottom: 4px solid var(--navy);
+  min-height: 110px;
+}
+
+/* logo cell */
+.hdr-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 14px;
+  border-right: 1px solid var(--border);
+  gap: 6px;
+  background: var(--navy-light);
+}
+
+.hdr-logo img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.hdr-logo .co-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+/* title cell */
+.hdr-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  gap: 3px;
+}
+
+.hdr-title .sub {
+  font-size: 9.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.hdr-title h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hdr-title .divider {
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+/* meta info cell */
+.hdr-meta {
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-row {
+  display: flex;
+  flex: 1;
+  border-bottom: 1px solid var(--border);
+}
+.meta-row:last-child { border-bottom: none; }
+
+.meta-lbl {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--muted);
+  padding: 0 8px;
+  background: var(--navy-light);
+  width: 108px;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  flex-shrink: 0;
+}
+
+.meta-val {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--navy);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* ─── NAME BAND ────────────────────────────────────────────── */
+.name-band {
+  background: var(--navy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 20px;
+}
+
+.name-band .nb-lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  min-width: 72px;
+}
+
+.name-band .nb-pipe {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,.3);
+  flex-shrink: 0;
+}
+
+.name-band .nb-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ─── BODY ──────────────────────────────────────────────────── */
+/* ─── BODY ──────────────────────────────────────────────────── */
+.cv-body {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  width: 100%;
+}
+
+/* LEFT */
+.col-left {
+  padding: 14px 16px;
+  border-right: 1px solid var(--border);
+  width: 100%; /* IMPORTANT: remove fixed width control */
+}
+
+/* RIGHT */
+.col-right {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* ─── SECTION ───────────────────────────────────────────────── */
+.cv-sec { margin-bottom: 13px; }
+
+.sec-hdr {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  background: var(--navy);
+  padding: 4px 10px;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.sec-hdr::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--gold);
+}
+
+/* ─── INFO TABLE ─────────────────────────────────────────────── */
+.itbl {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.itbl tr { border-bottom: 1px solid #f0f4fb; }
+.itbl tr:last-child { border-bottom: none; }
+
+.itbl td {
+  padding: 3.5px 6px;
+  vertical-align: middle;
+}
+
+.itbl td:first-child {
+  font-weight: 600;
+  color: var(--muted);
+  width: 43%;
+  font-size: 11px;
+}
+
+.itbl td:last-child {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* ─── EXPERIENCE TABLE ───────────────────────────────────────── */
+.exp-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.exp-tbl thead tr { background: var(--navy-light); }
+
+.exp-tbl th {
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+  text-align: left;
+  border: 1px solid var(--border);
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.exp-tbl td {
+  padding: 5px 8px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* ─── PORTRAIT ───────────────────────────────────────────────── */
+
+.portrait-wrap::before {
+  content: 'PORTRAIT';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(12,45,90,.65);
+  color: rgba(255,255,255,.7);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 3px;
+}
+/* ─── PORTRAIT ───────────────────────────────────────────────── */
+.portrait-wrap {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--navy-light);
+  position: relative;
+}
+
+/* remove weird scaling completely */
+.portrait-wrap img {
+  width: 100%;
+  height: 560px;   /* 👈 increase this to make it bigger */
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── SKILLS ─────────────────────────────────────────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 4px 2px;
+}
+
+.sk-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sk-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  border: 2px solid var(--border);
+  transition: background .2s;
+}
+
+.sk-box.yes {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+.sk-box.no {
+  background: #f9fafb;
+  color: #d1d5db;
+  border-color: #e5e7eb;
+}
+
+.sk-lbl {
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  line-height: 1.2;
+}
+
+/* ─── NOTE ───────────────────────────────────────────────────── */
+.note-content {
+  font-size: 11px;
+  padding: 7px 8px;
+  background: #f9fafd;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  min-height: 55px;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+/* ─── DOCUMENTS ─────────────────────────────────────────────── */
+.cv-docs {
+  border-top: 3px solid var(--navy);
+  padding: 14px 16px;
+}
+
+.docs-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.doc-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.doc-card .doc-head {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  padding: 5px 8px;
+  background: var(--navy-light);
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.doc-card img {
+  width: 100%;
+  height: 175px;
+  object-fit: cover;
+  display: block;
+  background: var(--navy-light);
+}
+
+.doc-placeholder {
+  width: 100%;
+  height: 175px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fb;
+  color: #cbd5e1;
+  gap: 6px;
+}
+
+.doc-placeholder i { font-size: 28px; }
+.doc-placeholder span { font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+.cv-foot {
+  background: var(--navy);
+  padding: 8px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cv-foot .foot-left {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,.6);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.cv-foot .foot-right {
+  font-size: 10px;
+  color: rgba(255,255,255,.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOADING / TOAST
+═══════════════════════════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast.show { display: flex; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PRINT STYLES  (removes bar, forces A4)
+═══════════════════════════════════════════════════════════════ */
+@media print {
+  body { background: #fff; }
+  .action-bar, .toast { display: none !important; }
+  .cv-page {
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+  .cv-page { page-break-inside: avoid; }
+  .cv-docs  { page-break-before: auto; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     ACTION BAR
+════════════════════════════════════════════════════════ -->
+<div class="action-bar">
+  <div class="bar-title">
+    <i class="fas fa-id-card-alt"></i>
+    Applicant Profile
+    <span id="barName"></span>
+  </div>
+
+  <button class="btn btn-back" onclick="history.back()">
+    <i class="fas fa-arrow-left"></i> Back
+  </button>
+
+  <button class="btn btn-pdf" onclick="window.print()">
+    <i class="fas fa-file-pdf"></i> Download PDF
+  </button>
+
+  <button class="btn btn-img" id="imgBtn" onclick="downloadImage()">
+    <i class="fas fa-image"></i> Save as Image
+  </button>
+
+  <button class="btn btn-share" onclick="shareWhatsApp()">
+    <i class="fab fa-whatsapp"></i> Share
+  </button>
+
+  <button class="btn btn-approve" onclick="approveApplicant()">
+    <i class="fas fa-check-circle"></i> Approve
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     CV PAGE
+════════════════════════════════════════════════════════ -->
+<div id="cvContent" class="cv-page">
+
+  <!-- ── HEADER ─────────────────────────────────────────── -->
+  <div class="cv-header">
+
+    <div class="hdr-logo">
+      <!-- Replace ../logo.jpeg with your logo path -->
+      <img id="logoImg" src="../logo.jpeg" alt="Company Logo"
+           onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'72\' height=\'72\' viewBox=\'0 0 72 72\'%3E%3Crect width=\'72\' height=\'72\' rx=\'8\' fill=\'%230c2d5a\'/%3E%3Ctext x=\'50%25\' y=\'54%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23fff\' font-size=\'11\' font-family=\'Arial\' font-weight=\'bold\'%3ELOGO%3C/text%3E%3C/svg%3E'">
+      <div class="co-name" id="coName">AL SEGER</div>
+    </div>
+
+    <div class="hdr-title">
+      <div class="sub">Job Application</div>
+      <h1>Application for Employment</h1>
+      <div class="divider"></div>
+    </div>
+
+    <div class="hdr-meta">
+      <div class="meta-row">
+        <span class="meta-lbl">Application No</span>
+        <span class="meta-val" id="appId">—</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-lbl">Post Applied For</span>
+        <span class="meta-val" id="position">—</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-lbl">Monthly Salary</span>
+        <span class="meta-val" id="salary">—</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-lbl">Contract Period</span>
+        <span class="meta-val" id="contract">—</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── NAME BAND ─────────────────────────────────────── -->
+  <div class="name-band">
+    <span class="nb-lbl">Full Name</span>
+    <div class="nb-pipe"></div>
+    <span class="nb-val" id="fullName">— — —</span>
+  </div>
+
+  <!-- ── BODY ───────────────────────────────────────────── -->
+  <div class="cv-body">
+
+    <!-- LEFT COLUMN -->
+    <div class="col-left">
+
+      <!-- Personal Details -->
+      <div class="cv-sec">
+        <div class="sec-hdr">Personal Details</div>
+        <table class="itbl">
+          <tr><td>Nationality</td>    <td id="nationality">—</td></tr>
+          <tr><td>Religion</td>       <td id="religion">—</td></tr>
+          <tr><td>Date Of Birth</td>  <td id="dob">—</td></tr>
+          <tr><td>Place Of Birth</td> <td id="birthPlace">—</td></tr>
+          <tr><td>Age</td>            <td id="age">—</td></tr>
+          <tr><td>Marital Status</td> <td id="marital">—</td></tr>
+          <tr><td>Weight (kg)</td>    <td id="weight">—</td></tr>
+          <tr><td>Height (cm)</td>    <td id="height">—</td></tr>
+          <tr><td>Education</td>      <td id="education">—</td></tr>
+        </table>
+      </div>
+
+      <!-- Passport Details -->
+      <div class="cv-sec">
+        <div class="sec-hdr">Passport Details</div>
+        <table class="itbl">
+          <tr><td>Passport Number</td><td id="passport">—</td></tr>
+          <tr><td>Issue Place</td>    <td id="issuePlace">—</td></tr>
+          <tr><td>Issue Date</td>     <td id="issueDate">—</td></tr>
+          <tr><td>Expiry Date</td>    <td id="expiry">—</td></tr>
+        </table>
+      </div>
+
+      <!-- Languages -->
+      <div class="cv-sec">
+        <div class="sec-hdr">Languages</div>
+        <table class="itbl">
+          <tr><td>Arabic</td> <td id="arabic">—</td></tr>
+          <tr><td>English</td><td id="english">—</td></tr>
+          <tr><td>French</td> <td id="french">—</td></tr>
+        </table>
+      </div>
+
+      <!-- Experience -->
+      <div class="cv-sec">
+        <div class="sec-hdr">Experience</div>
+        <table class="exp-tbl">
+          <thead>
+            <tr>
+              <th>Period / المدة</th>
+              <th>Country / الدولة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="expPeriod">—</td>
+              <td id="expCountry">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Contact & Destination -->
+      <div class="cv-sec">
+        <table class="itbl">
+          <tr><td>Mobile</td>         <td id="phone">—</td></tr>
+          <tr><td>Family Mobile</td>  <td id="familyPhone">—</td></tr>
+          <tr><td>Broker</td>         <td id="broker">—</td></tr>
+          <tr><td>Destination</td>    <td id="countryDest">—</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-right">
+
+      <!-- Portrait Photo -->
+      <div class="portrait-wrap">
+        <img id="portraitImg" src="../logo.jpeg" alt="Portrait Photo"
+             onerror="this.onerror=null;this.style.visibility='hidden'">
+      </div>
+
+      <!-- Skills -->
+      <div class="cv-sec">
+        <div class="sec-hdr">Skills</div>
+        <div class="skills-grid">
+          <div class="sk-item">
+            <div class="sk-box no" id="elderlyBox">✘</div>
+            <div class="sk-lbl">Care of<br>Elderly</div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-box no" id="babysitterBox">✘</div>
+            <div class="sk-lbl">Baby<br>Sitter</div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-box no" id="cleaningBox">✘</div>
+            <div class="sk-lbl">Cleaning</div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-box no" id="cookingBox">✘</div>
+            <div class="sk-lbl">Cooking</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Note -->
+      <div class="cv-sec">
+        <div class="sec-hdr">Note</div>
+        <div class="note-content" id="noteText">—</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ── DOCUMENTS ─────────────────────────────────────── -->
+  <div class="cv-docs">
+    <div class="sec-hdr">Documents &amp; Photos</div>
+    <div class="docs-row">
+
+      <div class="doc-card">
+        <div class="doc-head"><i class="fas fa-id-card"></i> ID Card</div>
+        <div id="idWrap">
+          <div class="doc-placeholder">
+            <i class="fas fa-id-card"></i>
+            <span>No ID Photo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-head"><i class="fas fa-user"></i> Portrait (3×4)</div>
+        <div id="portraitWrap">
+          <div class="doc-placeholder">
+            <i class="fas fa-user"></i>
+            <span>No Portrait</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-head"><i class="fas fa-passport"></i> Passport</div>
+        <div id="passportWrap">
+          <div class="doc-placeholder">
+            <i class="fas fa-passport"></i>
+            <span>No Passport Photo</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <div class="cv-foot">
+    <span class="foot-left" id="footerCompany">AL SEGER Recruitment Agency</span>
+    <span class="foot-right" id="genDate"></span>
+  </div>
+
+</div><!-- end .cv-page -->
+
+<!-- Toast notification -->
+<div class="toast" id="toast">
+  <i class="fas fa-spinner fa-spin"></i>
+  <span id="toastMsg">Generating image…</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════════ -->
+<script>
+/* ─────────────────────────────────────────────────────────
+   HELPERS
+───────────────────────────────────────────────────────── */
+function txt(id, val) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = (val !== undefined && val !== null && String(val).trim() !== '')
+    ? String(val)
+    : '—';
+}
+
+function setImg(wrapId, src, alt) {
+  const wrap = document.getElementById(wrapId);
+  if (!wrap || !src || src.length < 20) return;
+  wrap.innerHTML = '';
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = alt || '';
+  img.style.cssText = 'width:100%;height:175px;object-fit:cover;display:block;';
+  img.onerror = function() { this.style.visibility = 'hidden'; };
+  wrap.appendChild(img);
+}
+
+function skill(boxId, val) {
+  const el = document.getElementById(boxId);
+  if (!el) return;
+  const yes = val === 'Yes' || val === 'yes' || val === true || val === 1;
+  el.textContent = yes ? '✔' : '✘';
+  el.className = 'sk-box ' + (yes ? 'yes' : 'no');
+}
+
+function showToast(msg, icon = 'fa-spinner fa-spin') {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.querySelector('i').className = 'fas ' + icon;
+  t.classList.add('show');
+}
+
+function hideToast() {
+  document.getElementById('toast').classList.remove('show');
+}
+
+/* ─────────────────────────────────────────────────────────
+   LOAD APPLICANT DATA
+   Priority: URL ?id= param → 'viewApplicant' key → last in list
+───────────────────────────────────────────────────────── */
+function loadApplicant() {
+  let d = null;
+  const params = new URLSearchParams(window.location.search);
+  const id     = params.get('id');
+
+  try {
+    if (id) {
+      const list = JSON.parse(localStorage.getItem('applicants') || '[]');
+      d = list.find(a =>
+        String(a.id) === id ||
+        String(a.application_number) === id
+      ) || null;
+    }
+
+    if (!d) {
+      const raw = localStorage.getItem('viewApplicant');
+      if (raw) d = JSON.parse(raw);
+    }
+
+    if (!d) {
+      const list = JSON.parse(localStorage.getItem('applicants') || '[]');
+      if (list.length) d = list[list.length - 1];
+    }
+  } catch (e) {
+    console.warn('Error reading applicant data:', e);
+  }
+
+  if (d) {
+    populate(d);
+  } else {
+    // Show demo data so the layout is visible
+    populate(DEMO);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   POPULATE ALL FIELDS
+───────────────────────────────────────────────────────── */
+function populate(d) {
+  // Full name
+  const fullName = [d.first_name, d.middle_name, d.last_name]
+    .filter(Boolean).join(' ').toUpperCase() || d.full_name || '—';
+  txt('fullName', fullName);
+  document.getElementById('barName').textContent = '— ' + fullName;
+
+  // Header meta
+  const appNo = d.application_number ? 'NO-' + d.application_number : (d.appId || null);
+  txt('appId',    appNo);
+  txt('position', d.post_applied);
+  txt('salary',   d.monthly_salary);
+  txt('contract', d.contract_period);
+
+  // Personal
+  txt('nationality', d.nationality);
+  txt('religion',    d.religion);
+  txt('dob',         d.dob);
+  txt('birthPlace',  d.birth_place);
+  txt('age',         d.age);
+  txt('marital',     d.marital_status);
+  txt('weight',      d.weight);
+  txt('height',      d.height);
+  txt('education',   d.education);
+
+  // Passport
+  txt('passport',   d.passport_number);
+  txt('issuePlace', d.issue_place);
+  txt('issueDate',  d.passport_issue_date);
+  txt('expiry',     d.passport_expiry);
+
+  // Languages
+  txt('arabic',  d.arabic);
+  txt('english', d.english);
+  txt('french',  d.french);
+
+  // Experience
+  txt('expPeriod',  d.experience_period  || 'NO EXPERIENCE');
+  txt('expCountry', d.experience_country || '—');
+
+  // Contact
+  txt('phone',       d.phone);
+  txt('familyPhone', d.family_phone);
+  txt('broker',      d.broker_name);
+  txt('countryDest', d.country);
+
+  // Skills
+  skill('elderlyBox',    d.care_elderly);
+  skill('babysitterBox', d.babysitter);
+  skill('cleaningBox',   d.cleaning);
+  skill('cookingBox',    d.cooking);
+
+  // Note
+  const noteEl = document.getElementById('noteText');
+  if (noteEl) noteEl.textContent = (d.note && d.note.trim()) ? d.note : '—';
+
+  // Portrait (right column)
+  const portrait = d.portrait || d.portrait_photo;
+  if (portrait) {
+    const pImg = document.getElementById('portraitImg');
+    if (pImg) pImg.src = portrait;
+  }
+
+  // Document photos (bottom grid)
+  if (d.id_card)        setImg('idWrap',       d.id_card,        'ID Card');
+  if (portrait)         setImg('portraitWrap',  portrait,         'Portrait');
+  if (d.passport_photo) setImg('passportWrap',  d.passport_photo, 'Passport');
+
+  // Page title
+  document.title = 'CV — ' + fullName;
+}
+
+/* ─────────────────────────────────────────────────────────
+   EXPORT: PDF via browser print
+───────────────────────────────────────────────────────── */
+// Triggered by "Download PDF" button → window.print()
+
+/* ─────────────────────────────────────────────────────────
+   EXPORT: PNG image via html2canvas
+───────────────────────────────────────────────────────── */
+function downloadImage() {
+  const btn = document.getElementById('imgBtn');
+  showToast('Generating image…', 'fa-spinner fa-spin');
+  btn.disabled = true;
+
+  const el   = document.getElementById('cvContent');
+  const name = (document.getElementById('fullName')?.textContent || 'applicant')
+                 .replace(/\s+/g, '_').toLowerCase().replace(/[^a-z0-9_]/g, '');
+
+  html2canvas(el, {
+    scale: 2.5,
+    useCORS: true,
+    allowTaint: true,
+    backgroundColor: '#ffffff',
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: el.scrollWidth,
+    windowHeight: el.scrollHeight,
+    logging: false,
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = (name || 'applicant') + '_cv.png';
+    link.href = canvas.toDataURL('image/png', 1.0);
+    link.click();
+    hideToast();
+  }).catch(err => {
+    hideToast();
+    alert('Image export failed. Try "Download PDF" instead.\n\n' + err.message);
+  }).finally(() => {
+    btn.disabled = false;
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   SHARE: WhatsApp
+───────────────────────────────────────────────────────── */
+function shareWhatsApp() {
+  const name    = document.getElementById('fullName')?.textContent  || '—';
+  const pos     = document.getElementById('position')?.textContent  || '—';
+  const country = document.getElementById('countryDest')?.textContent || '—';
+  const appId   = document.getElementById('appId')?.textContent     || '—';
+
+  const msg = encodeURIComponent(
+    `📋 *Job Application — AL SEGER*\n` +
+    `👤 *Name:* ${name}\n` +
+    `💼 *Position:* ${pos}\n` +
+    `🌍 *Destination:* ${country}\n` +
+    `🔖 *Application:* ${appId}\n\n` +
+    `_To see the full profile, contact AL SEGER Recruitment Agency._`
+  );
+  window.open(`https://wa.me/?text=${msg}`, '_blank');
+}
+
+/* ─────────────────────────────────────────────────────────
+   APPROVE (stub — wire to your backend)
+───────────────────────────────────────────────────────── */
+function approveApplicant() {
+  const name = document.getElementById('fullName')?.textContent || 'this applicant';
+  if (confirm(`Approve ${name}?`)) {
+    showToast('Approved!', 'fa-check-circle');
+    setTimeout(hideToast, 2500);
+    // TODO: POST to your backend here
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   DEMO DATA  (shown when no localStorage data found)
+───────────────────────────────────────────────────────── */
+const DEMO = {
+  first_name: 'Fatuma', middle_name: 'Ali', last_name: 'Hassan',
+  application_number: '0001',
+  post_applied: 'House Maid',
+  monthly_salary: '1000 SAR',
+  contract_period: '2 Years',
+  nationality: 'Ethiopia',
+  religion: 'Muslim',
+  dob: '1998-03-25',
+  birth_place: 'Addis Ababa',
+  age: '26',
+  marital_status: 'Single',
+  weight: '55',
+  height: '160',
+  education: 'Grade 10',
+  passport_number: 'EP-123456',
+  issue_place: 'Ethiopia',
+  passport_issue_date: '2022-01-10',
+  passport_expiry: '2032-01-09',
+  arabic: 'No', english: 'Yes', french: 'No',
+  experience_period: 'No Experience',
+  experience_country: '—',
+  phone: '+251 912 345 678',
+  family_phone: '+251 913 123 456',
+  broker_name: 'Sample Broker',
+  country: 'Saudi Arabia',
+  care_elderly: 'Yes',
+  babysitter: 'Yes',
+  cleaning: 'Yes',
+  cooking: 'No',
+  note: 'Demo record — fill from your form to see real data.',
+};
+
+/* ─────────────────────────────────────────────────────────
+   INIT
+───────────────────────────────────────────────────────── */
+document.getElementById('genDate').textContent =
+  'Generated: ' + new Date().toLocaleDateString('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric'
+  });
+
+document.addEventListener('DOMContentLoaded', loadApplicant);
+</script>
+<script src="applicant-view.js"></script>
+</body>
+</html>

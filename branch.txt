@@ -1,0 +1,94 @@
+al-seger/
+│
+├── frontend/
+│
+│   ├── assets/
+│   │   ├── images/
+│   │   │   ├── logo.jpeg
+│   │   │   ├── logo1.png
+│   │   │   └── al.png
+│   │   │
+│   │   └── icons/
+│   │
+│   ├── css/
+│   │   ├── style.css
+│   │   ├── admin.css
+│   │   └── view.css
+│   │
+│   ├── js/
+│   │   ├── main.js
+│   │   ├── auth.js
+│   │   ├── api.js
+│   │   ├── utils.js
+│   │   └── message.js
+│   │
+│   ├── pages/
+│   │   ├── index.html
+│   │   │
+│   │   └── admin/
+│   │       ├── dashboard.html
+│   │       ├── applicants.html
+│   │       ├── applicant-view.html
+│   │       ├── countries.html
+│   │       ├── reports.html
+│   │       ├── messages.html
+│   │       ├── training.html
+│   │       ├── settings.html
+│   │       └── login.html
+│   │
+│   └── components/
+│       ├── sidebar.html
+│       ├── navbar.html
+│       └── footer.html
+│
+├── backend/
+│
+│   ├── config/
+│   │   ├── db.js
+│   │   └── multer.js
+│   │
+│   ├── controllers/
+│   │   ├── applicantController.js
+│   │   ├── authController.js
+│   │   ├── countryController.js
+│   │   ├── settingsController.js
+│   │   └── reportController.js
+│   │
+│   ├── middleware/
+│   │   ├── auth.js
+│   │   ├── upload.js
+│   │   └── errorHandler.js
+│   │
+│   ├── models/
+│   │   ├── Applicant.js
+│   │   ├── Admin.js
+│   │   ├── Country.js
+│   │   └── Setting.js
+│   │
+│   ├── routes/
+│   │   ├── applicantRoutes.js
+│   │   ├── authRoutes.js
+│   │   ├── countryRoutes.js
+│   │   ├── reportRoutes.js
+│   │   └── settingsRoutes.js
+│   │
+│   ├── uploads/
+│   │   ├── portraits/
+│   │   ├── passports/
+│   │   └── idcards/
+│   │
+│   ├── database/
+│   │   └── schema.sql
+│   │
+│   ├── .env
+│   ├── server.js
+│   └── package.json
+│
+├── docs/
+│   ├── api.md
+│   ├── database.md
+│   └── deployment.md
+│
+├── README.md
+│
+└── .gitignore
