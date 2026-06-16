@@ -227,5 +227,3 @@ if(languageBtn && languageMenu){
     });
 
 }
-document.getElementById("currentLang").textContent =
-    lang.toUpperCase();
