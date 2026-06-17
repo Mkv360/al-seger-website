@@ -297,7 +297,7 @@ a {
       #f3d67a
     );
 
-    color:black;
+    
 
     border:none;
 }
@@ -322,10 +322,10 @@ a {
 
 .logo-area img {
 
-  width: 55px;
+  width: 65px;
   height: 55px;
   object-fit: cover;
-  border-radius: 50%;
+ 
 
 }
 
@@ -579,15 +579,14 @@ a {
   display: flex;
   align-items: center;
   gap: 14px;
-
-  margin-bottom: 18px;
+ color: #e0bf59;
+  margin-bottom: 12px;
 
 }
 
-
 .feature i {
 
-  color: var(--silver);
+  color: #e0bf59;
 
 }
 
@@ -1011,7 +1010,27 @@ a {
 
 }
 
+@media (max-width:768px){
 
+  .logo-text span{
+      display:none;
+  }
+
+  .logo-text h2{
+      font-size:16px;
+  }
+
+  .logo-area img{
+      width:50px;
+      height:50px;
+  }
+
+  .menu-btn{
+      display:block;
+      flex-shrink:0;
+  }
+
+}
 @media (max-width: 500px) {
 
   .hero {

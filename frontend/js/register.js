@@ -77,7 +77,67 @@ function isEmail(value){
 
 }
 
+// ============// ===============================
+// NAME FORMATTER
 // ===============================
+
+function toTitleCase(name){
+
+    return name
+        .toLowerCase()
+        .split(" ")
+        .filter(Boolean)
+        .map(word =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+        )
+        .join(" ");
+
+}
+
+// ===============================
+// NAME FORMATTER
+// ===============================
+
+function toTitleCase(name){
+
+    return name
+        .toLowerCase()
+        .split(" ")
+        .filter(Boolean)
+        .map(word =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+        )
+        .join(" ");
+
+}
+
+// Auto-format when user leaves input
+
+document
+.getElementById("fullName")
+.addEventListener("blur", function(){
+
+    this.value = toTitleCase(this.value);
+
+});
+
+document
+.getElementById("fullName")
+.addEventListener("input", function(){
+
+    const words = this.value.split(" ");
+
+    this.value = words.map(word => {
+
+        if (!word) return "";
+
+        return word.charAt(0).toUpperCase() +
+               word.slice(1).toLowerCase();
+
+    }).join(" ");
+
+});
+   // ===================
 // PASSWORD STRENGTH
 // ===============================
 
@@ -126,8 +186,10 @@ registerForm.addEventListener("submit", async (e) => {
 
     registerError.textContent = "";
 
-    const fullName =
-    document.getElementById("fullName").value.trim();
+ const fullName =
+toTitleCase(
+    document.getElementById("fullName").value.trim()
+);
 
     const phoneOrEmail =
     document.getElementById("phoneOrEmail").value.trim();
@@ -144,17 +206,23 @@ registerForm.addEventListener("submit", async (e) => {
     // Name Validation
 
     const nameRegex =
-    /^[A-Z][a-z]+(\s[A-Z][a-z]+)+$/;
+/^[A-Za-z]+(?:\s+[A-Za-z]+)+$/;
 
-    if(!nameRegex.test(fullName)){
+   if(!nameRegex.test(fullName)){
 
-        registerError.textContent =
-        "Use Camel Case. Example: Hamza Mohammed";
+    registerError.textContent =
+    "Enter your full name. Example: Hamza Mohammed";
 
-        return;
+    return;
 
-    }
+}
+document
+.getElementById("fullName")
+.addEventListener("blur", function(){
 
+    this.value = toTitleCase(this.value);
+
+});
     // Email or Phone Validation
 
     const validPhone =

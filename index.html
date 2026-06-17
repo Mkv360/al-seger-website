@@ -1,11 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=frontend/pages/index.html">
-    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="2; url=frontend/pages/index.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AL SEGER TRADING PLC</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.85),
+                    rgba(0,0,0,0.92)
+                );
+
+            font-family:'Poppins',sans-serif;
+            color:white;
+            overflow:hidden;
+            text-align:center;
+        }
+
+        .logo{
+            width:180px;
+            max-width:60vw;
+
+            filter:
+                drop-shadow(0 0 25px rgba(255,255,255,0.15));
+
+            animation:fadeIn 1s ease;
+        }
+
+        h1{
+            margin-top:25px;
+            font-size:32px;
+            font-weight:700;
+            letter-spacing:2px;
+        }
+
+        p{
+            margin-top:12px;
+            color:#c0c0c0;
+            font-size:15px;
+        }
+
+        .loader{
+            width:55px;
+            height:55px;
+
+            margin-top:30px;
+
+            border:3px solid rgba(255,255,255,0.12);
+            border-top:3px solid #d4af37;
+
+            border-radius:50%;
+
+            animation:spin 1s linear infinite;
+        }
+
+        @keyframes spin{
+            100%{
+                transform:rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        @media(max-width:768px){
+
+            .logo{
+                width:140px;
+            }
+
+            h1{
+                font-size:24px;
+            }
+
+            p{
+                font-size:14px;
+            }
+
+        }
+    </style>
 </head>
+
 <body>
-    Redirecting...
+
+    <img
+        src="frontend/assets/images/al segher.png.jpg.webp"
+        alt="AL SEGER Logo"
+        class="logo"
+    >
+
+    <h1>AL SEGER TRADING PLC</h1>
+
+    <p>Loading Website...</p>
+
+    <div class="loader"></div>
+
 </body>
+<script>
+setTimeout(() => {
+    window.location.href = "frontend/pages/index.html";
+}, 2000);
+</script>
 </html>

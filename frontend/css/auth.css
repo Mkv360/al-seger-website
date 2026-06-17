@@ -71,11 +71,23 @@
 }
 
 .language-btn{
-    background:none;
-    border:none;
-    cursor:pointer;
-    font-size:1.2rem;
-    color:inherit;
+   width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background: linear-gradient(
+        135deg,
+        #d4af37,
+        #f3d67a
+    );
+    color: #000;
+    transition: .35s ease;
+}
+.language-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:
+    0 10px 25px rgba(212,175,55,.3);
 }
 
 .language-menu{
