@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>User Dashboard | AL SEGER TRADING PLC</title>
+
+<!-- GOOGLE FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- CSS (same files as the landing page, plus this page's own stylesheet) -->
+<link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/auth.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- NAVBAR -->
+<!-- ========================= -->
+
+<header class="navbar">
+
+
+    <div class="logo-area">
+
+      <img src="../assets/images/al segher.png.jpg.webp" alt="AL SEGER Logo" class="logo" >
+      <div class="logo-text">
+        <h2 data-i18n="logo.name">AL SEGHER</h2>
+        <span data-i18n="logo.sub">TRADING PLC</span>
+        <span data-i18n="logo.tagline">Your Trusted Ethiopian Employment Agency</span>
+      </div>
+
+    </div>
+
+  <nav class="nav-links">
+
+    <!-- Hidden until we confirm the user is authenticated -->
+    <div class="dashboard-only-links" id="dashboardOnlyLinks">
+      <a href="#applications" id="navMyApplications">My Applications</a>
+      <a href="#" id="navApplyOnline">Apply Online</a>
+    </div>
+
+    <a href="../index.html#contact">Contact AL SEGER</a>
+
+    <div class="language-dropdown">
+
+      <button id="languageBtn" class="language-btn">
+        <i class="fas fa-globe"></i>
+      </button>
+
+      <div id="languageMenu" class="language-menu">
+
+        <button class="lang-option" data-lang="en">English</button>
+        <button class="lang-option" data-lang="am">አማርኛ</button>
+        <button class="lang-option" data-lang="om">Afaan Oromo</button>
+
+      </div>
+
+    </div>
+
+    <div>
+      <button id="themeToggle" class="theme-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+
+    <button id="logoutBtn" class="nav-auth-btn" hidden>
+      Logout
+    </button>
+
+  </nav>
+
+  <!-- MOBILE MENU -->
+
+  <div class="mobile-menu">
+
+    <div class="dashboard-only-links" id="mobileDashboardOnlyLinks">
+      <a href="#applications">My Applications</a>
+      <a href="#" id="mobileNavApplyOnline">Apply Online</a>
+    </div>
+
+    <a href="../index.html#contact">Contact AL SEGER</a>
+
+    <div class="mobile-controls">
+
+      <select id="mobileLanguageSelector" class="language-select">
+        <option value="en">English</option>
+        <option value="am">አማርኛ</option>
+        <option value="om">Afaan Oromo</option>
+      </select>
+
+      <button id="mobileThemeToggle" class="theme-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+
+    </div>
+
+    <div class="mobile-auth">
+      <button id="mobileLogoutBtn" class="mobile-logout-btn" hidden>
+        Logout
+      </button>
+    </div>
+
+  </div>
+
+  <div class="menu-btn">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+</header>
+
+
+<main class="dashboard-main">
+
+  <!-- =========================
+       LOADING STATE
+  ========================= -->
+  <section class="state-panel" id="loadingState">
+    <div class="spinner" aria-hidden="true"></div>
+    <p class="state-text">Loading your dashboard…</p>
+  </section>
+
+  <!-- =========================
+       NOT LOGGED IN STATE
+  ========================= -->
+  <section class="state-panel guest-panel" id="notLoggedInState" hidden>
+    <div class="guest-card fade-up">
+      <div class="guest-icon">
+        <i class="fa-solid fa-user-lock"></i>
+      </div>
+      <h1>You're not logged in</h1>
+      <p>Sign in to view your AL Seger dashboard.</p>
+      <div class="guest-actions">
+        <a href="index.html" class="btn secondary-btn">Log In</a>
+        <a href="index.html" class="btn primary-btn">Create Account</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       ERROR STATE
+  ========================= -->
+  <section class="state-panel guest-panel" id="errorState" hidden>
+    <div class="guest-card fade-up">
+      <div class="guest-icon error-icon">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h1>We couldn't load your dashboard</h1>
+      <p id="errorMessage">Check your connection and try again.</p>
+      <div class="guest-actions">
+        <button class="btn primary-btn" id="retryBtn" type="button">Retry</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       DASHBOARD STATE
+  ========================= -->
+  <div class="dashboard-content" id="dashboardState" hidden>
+
+    <!-- SECTION 1: WELCOME -->
+    <section class="dashboard-welcome fade-up">
+      <h1 id="welcomeHeading">Welcome Back</h1>
+      <p class="dashboard-subtitle">Manage your applications and profile from one place.</p>
+    </section>
+
+    <!-- SECTION 2: PROFILE OVERVIEW -->
+    <section class="profile-card fade-up">
+
+      <div class="profile-card-top">
+        <div class="profile-avatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <span class="status-badge">
+          <span class="status-dot" aria-hidden="true"></span>
+          Active
+        </span>
+      </div>
+
+      <dl class="profile-details">
+
+        <div class="profile-row">
+          <dt>Full Name</dt>
+          <dd id="userFullName">—</dd>
+        </div>
+
+        <div class="profile-row">
+          <dt>Phone / Email</dt>
+          <dd id="userContact">—</dd>
+        </div>
+
+        <div class="profile-row">
+          <dt>Gender</dt>
+          <dd id="userGender">—</dd>
+        </div>
+
+        <div class="profile-row">
+          <dt>Registered</dt>
+          <dd id="userCreatedAt">—</dd>
+        </div>
+
+      </dl>
+
+      <div class="profile-completion">
+        <div class="profile-completion-label">
+          <span>Profile Completion</span>
+          <span id="completionPercent">0%</span>
+        </div>
+        <div class="completion-track">
+          <div class="completion-fill" id="completionFill"></div>
+        </div>
+      </div>
+
+      <button class="btn secondary-btn profile-edit-btn" id="editProfileBtn" type="button">
+        Edit Profile
+      </button>
+
+    </section>
+
+    <!-- SECTION 3: QUICK ACTIONS -->
+    <section class="quick-actions fade-up">
+
+      <h2 class="dashboard-section-title">Quick Actions</h2>
+
+      <div class="quick-actions-grid">
+
+        <button class="quick-action-card" id="qaApplyOnline" type="button">
+          <div class="quick-action-icon"><i class="fa-solid fa-file-circle-plus"></i></div>
+          <h3>Apply Online</h3>
+          <p>Start a new job application</p>
+        </button>
+
+        <a class="quick-action-card" href="#applications">
+          <div class="quick-action-icon"><i class="fa-solid fa-folder-open"></i></div>
+          <h3>My Applications</h3>
+          <p>Track your submitted applications</p>
+        </a>
+
+        <a class="quick-action-card" href="../index.html#contact">
+          <div class="quick-action-icon"><i class="fa-solid fa-headset"></i></div>
+          <h3>Contact Agency</h3>
+          <p>Reach our recruitment team</p>
+        </a>
+
+        <button class="quick-action-card" id="qaUpdateProfile" type="button">
+          <div class="quick-action-icon"><i class="fa-solid fa-user-pen"></i></div>
+          <h3>Update Profile</h3>
+          <p>Keep your information current</p>
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 4: APPLICATION SUMMARY -->
+    <section class="application-summary fade-up" id="applications">
+
+      <h2 class="dashboard-section-title">Application Summary</h2>
+
+      <div class="summary-grid">
+
+        <div class="summary-card">
+          <i class="fa-solid fa-paper-plane"></i>
+          <h2 id="submittedCount">0</h2>
+          <p>Applications Submitted</p>
+        </div>
+
+        <div class="summary-card">
+          <i class="fa-solid fa-hourglass-half"></i>
+          <h2 id="pendingCount">0</h2>
+          <p>Pending Review</p>
+        </div>
+
+        <div class="summary-card">
+          <i class="fa-solid fa-circle-check"></i>
+          <h2 id="approvedCount">0</h2>
+          <p>Approved</p>
+        </div>
+
+        <div class="summary-card">
+          <i class="fa-solid fa-circle-xmark"></i>
+          <h2 id="rejectedCount">0</h2>
+          <p>Rejected</p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 5: RECENT ACTIVITY -->
+    <section class="recent-activity fade-up">
+
+      <h2 class="dashboard-section-title">Recent Activity</h2>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-icon"><i class="fa-solid fa-user-plus"></i></div>
+          <div class="timeline-content">
+            <h4>Account Created</h4>
+            <p id="activityCreatedAt">—</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon"><i class="fa-solid fa-right-to-bracket"></i></div>
+          <div class="timeline-content">
+            <h4>Last Login</h4>
+            <p>This session</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="timeline-content">
+            <h4>Application Activity</h4>
+            <p>Your application updates will appear here.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 6: ANNOUNCEMENTS -->
+    <section class="announcement fade-up">
+
+      <div class="announcement-card">
+        <div class="announcement-icon"><i class="fa-solid fa-bullhorn"></i></div>
+        <div>
+          <span class="announcement-label">Latest Announcement</span>
+          <p id="announcementText">New recruitment opportunities are available for Saudi Arabia and UAE.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <p class="action-toast" id="actionToast" role="status" hidden></p>
+
+  </div>
+
+</main>
+
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer class="footer">
+
+  <img src="../assets/images/al segher.png.jpg.webp" alt="AL SEGER Logo" loading="lazy">
+
+  <h2 data-i18n="footer.companyName">AL SEGER TRADING PLC</h2>
+
+  <p data-i18n="footer.tagline">
+    Trusted Ethiopian Employment Agency for International Opportunities.
+  </p>
+
+  <div class="socials">
+
+    <a href="#">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <a href="#">
+      <i class="fa-brands fa-telegram"></i>
+    </a>
+
+    <a href="#">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+  </div>
+
+  <span data-i18n="footer.copyright">
+    © 2026 AL SEGER TRADING PLC. All Rights Reserved.
+  </span>
+
+</footer>
+
+
+<!-- JS -->
+<script src="../js/language.js" defer></script>
+<script src="../js/theme.js" defer></script>
+<script src="../js/main.js" defer></script>
+<script src="../js/dashboard.js" defer></script>
+
+</body>
+</html>

@@ -37,7 +37,10 @@ async function getAll(req, res, next) {
     });
 
     // Attach public URLs to documents in each applicant if needed
-    return res.status(200).json({ success: true, ...result });
+    return res.status(200).json({
+  success: true,
+  data: result
+});
   } catch (err) {
     next(err);
   }
@@ -268,6 +271,23 @@ async function _processUploadedFiles(files, applicantId) {
   }
   return results;
 }
+async function getMyApplicants(req, res, next) {
+  try {
+    const userId = req.user.id; // depends on your auth middleware
+
+    const result = await Applicant.findAll({
+      user_id: userId
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: result
+    });
+
+  } catch (err) {
+    next(err);
+  }
+}
 
 module.exports = {
   getAll,
@@ -279,4 +299,5 @@ module.exports = {
   uploadDocuments,
   deleteDocument,
   getStats,
+   getMyApplicants
 };

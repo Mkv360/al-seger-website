@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Online Applications - AL SEGER</title>
+
+<link rel="stylesheet" href="../../css/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  .status {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    text-transform: capitalize;
+  }
+
+  .status.pending { background: #fff3cd; color: #856404; }
+  .status.approved { background: #d4edda; color: #155724; }
+  .status.rejected { background: #f8d7da; color: #721c24; }
+
+  .btn-approve { background: #28a745; color: #fff; border: none; padding: 5px 8px; cursor: pointer; }
+  .btn-reject { background: #dc3545; color: #fff; border: none; padding: 5px 8px; cursor: pointer; }
+  .btn-delete { background: #6c757d; color: #fff; border: none; padding: 5px 8px; cursor: pointer; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  .page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <img src="../../assets/images/al segher.png.jpg.webp" alt="Logo">
+      <h2>AL SEGER</h2>
+    </div>
+
+    <ul class="sidebar-menu">
+
+      <li>
+        <a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+      </li>
+
+      <li class="active">
+        <a href="online-applications.html"><i class="fa-solid fa-inbox"></i> Online Applications</a>
+      </li>
+
+      <li>
+        <a href="applicants.html"><i class="fa-solid fa-users"></i> Applicants</a>
+      </li>
+
+      <li>
+        <a href="messages.html"><i class="fa-solid fa-envelope"></i> Messages</a>
+      </li>
+
+      <li>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+      </li>
+
+    </ul>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <h1>Online Applications</h1>
+      <p>Review and manage incoming applications</p>
+    </div>
+
+    <!-- LOADING -->
+    <div id="loadingState" style="display:none;">
+      <p>Loading applications...</p>
+    </div>
+
+    <!-- EMPTY -->
+    <div id="emptyState" style="display:none;">
+      <p>No applications found.</p>
+    </div>
+
+    <!-- TABLE -->
+    <div class="dashboard-card">
+
+      <div class="page-title">
+        <h3>Applications Inbox</h3>
+        <button onclick="loadApplications()">Refresh</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody id="applicationsTableBody"></tbody>
+      </table>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<div id="approveModal" class="modal">
+  <div class="modal-content">
+    <h3>Approve Application</h3>
+
+    <input id="postApplied" placeholder="Post Applied For">
+    <input id="contractPeriod" placeholder="Contract Period">
+    <input id="monthlySalary" placeholder="Monthly Salary">
+    <input id="education" placeholder="Education">
+
+    <select id="destinationCountry">
+      <option value="">Select Country</option>
+      <option>Qatar</option>
+      <option>Saudi Arabia</option>
+      <option>Jordan</option>
+      <option>Dubai</option>
+      <option>Kuwait</option>
+      <option>Europe</option>
+    </select>
+
+    <button id="confirmApproveBtn">Approve</button>
+    <button onclick="closeApproveModal()">Cancel</button>
+  </div>
+</div>
+<script src="../../js/admin-auth.js"></script>
+<script src="../../js/online-applications.js"></script>
+
+</body>
+</html>

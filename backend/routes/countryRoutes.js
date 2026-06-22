@@ -6,7 +6,7 @@
 const { Router }                  = require('express');
 const { body, param }             = require('express-validator');
 const ctrl                        = require('../controllers/countryController');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticate, authorize } = require('../middleware/adminAuth');
 
 const router = Router();
 router.use(authenticate);

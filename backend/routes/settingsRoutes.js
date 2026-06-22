@@ -5,7 +5,7 @@
 
 const { Router }                  = require('express');
 const ctrl                        = require('../controllers/settingsController');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticate, authorize } = require('../middleware/adminAuth');
 
 const router = Router();
 router.use(authenticate);

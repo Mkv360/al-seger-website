@@ -8,7 +8,7 @@
 const { Router }                     = require('express');
 const { body, param }                = require('express-validator');
 const ctrl                           = require('../controllers/applicantController');
-const { authenticate, authorize }    = require('../middleware/auth');
+const { authenticate, authorize }    = require('../middleware/adminAuth');
 const { handleDocumentUploads }      = require('../middleware/upload');
 
 const router = Router();
@@ -37,7 +37,7 @@ const applicantValidators = [
 
 // GET /api/applicants/stats       — must be before /:id
 router.get('/stats', ctrl.getStats);
-
+router.get('/my', authenticate, ctrl.getMyApplicants);
 // GET /api/applicants
 router.get('/', ctrl.getAll);
 

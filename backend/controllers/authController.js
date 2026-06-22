@@ -37,7 +37,7 @@
 
 const { validationResult } = require('express-validator');
 const Admin                = require('../models/Admin');
-const { generateToken }    = require('../middleware/auth');
+const { generateToken }    = require('../middleware/adminAuth');
 const { query }            = require('../config/db');
 
 // ── POST /api/auth/login ──────────────────────────────────────────────────────

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apply Online | AL SEGER TRADING PLC</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS (same path convention as dashboard.html) -->
+  <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/apply.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<!-- ========================= -->
+<!-- NAVBAR (mirrors dashboard.html exactly) -->
+<!-- ========================= -->
+<header class="navbar">
+<a href="home.html" class="back-btn" aria-label="Go back">
+  <i class="fa-solid fa-arrow-left"></i>
+</a>
+  <div class="logo-area">
+    <img src="../assets/images/al segher.png.jpg.webp" alt="AL SEGER Logo" class="logo">
+    <div class="logo-text">
+      <h2 data-i18n="logo.name">AL SEGHER</h2>
+      <span data-i18n="logo.sub">TRADING PLC</span>
+      <span data-i18n="logo.tagline">Your Trusted Ethiopian Employment Agency</span>
+    </div>
+  </div>
+
+  <nav class="nav-links">
+    <div class="dashboard-only-links" id="dashboardOnlyLinks">
+      <a href="dashboard.html#applications" id="navMyApplications">My Applications</a>
+      <a href="apply.html" id="navApplyOnline" class="nav-active">Apply Online</a>
+    </div>
+
+    <a href="../index.html#contact">Contact AL SEGER</a>
+
+    <div class="language-dropdown">
+      <button id="languageBtn" class="language-btn">
+        <i class="fas fa-globe"></i>
+      </button>
+      <div id="languageMenu" class="language-menu">
+        <button class="lang-option" data-lang="en">English</button>
+        <button class="lang-option" data-lang="am">አማርኛ</button>
+        <button class="lang-option" data-lang="om">Afaan Oromo</button>
+      </div>
+    </div>
+
+    <div>
+      <button id="themeToggle" class="theme-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+
+    <button id="logoutBtn" class="nav-auth-btn" hidden>Logout</button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu">
+    <div class="dashboard-only-links" id="mobileDashboardOnlyLinks">
+      <a href="dashboard.html#applications">My Applications</a>
+      <a href="apply.html" id="mobileNavApplyOnline">Apply Online</a>
+    </div>
+    <a href="../index.html#contact">Contact AL SEGER</a>
+    <div class="mobile-controls">
+      <select id="mobileLanguageSelector" class="language-select">
+        <option value="en">English</option>
+        <option value="am">አማርኛ</option>
+        <option value="om">Afaan Oromo</option>
+      </select>
+      <button id="mobileThemeToggle" class="theme-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+    <div class="mobile-auth">
+      <button id="mobileLogoutBtn" class="mobile-logout-btn" hidden>Logout</button>
+    </div>
+  </div>
+
+  <div class="menu-btn">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+</header>
+
+
+<!-- ========================= -->
+<!-- MAIN -->
+<!-- ========================= -->
+<main class="apply-main">
+
+  <!-- ========== LOADING STATE ========== -->
+  <section class="state-panel" id="loadingState" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <p class="state-text">Loading your profile…</p>
+  </section>
+
+  <!-- ========== NOT LOGGED IN STATE ========== -->
+  <section class="state-panel guest-panel" id="authState" hidden>
+    <div class="guest-card fade-up">
+      <div class="guest-icon">
+        <i class="fa-solid fa-user-lock"></i>
+      </div>
+      <h1>Sign In to Apply</h1>
+      <p>You must be logged in to submit a job application with AL SEGER.</p>
+      <div class="guest-actions">
+        <a href="index.html" class="btn secondary-btn">Log In</a>
+        <a href="index.html" class="btn primary-btn">Create Account</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== APPLICATION FORM STATE ========== -->
+  <section id="formState" hidden>
+
+    <!-- Page Hero -->
+    <div class="apply-hero fade-up" aria-hidden="true">
+      <div class="apply-hero-inner">
+        <div class="apply-hero-badge">
+          <i class="fa-solid fa-plane-departure"></i>
+          <span>New Application</span>
+        </div>
+        <h1>Job Application Form</h1>
+        <p>Our recruitment team reviews every submission within 2–5 business days.</p>
+      </div>
+      <!-- decorative world line SVG -->
+      <svg class="hero-deco" viewBox="0 0 600 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M0 40 Q150 10 300 40 T600 40" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
+        <circle cx="60" cy="38" r="4" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="180" cy="22" r="3" fill="rgba(255,255,255,0.2)"/>
+        <circle cx="300" cy="40" r="5" fill="rgba(255,255,255,0.4)"/>
+        <circle cx="430" cy="24" r="3" fill="rgba(255,255,255,0.2)"/>
+        <circle cx="540" cy="38" r="4" fill="rgba(255,255,255,0.3)"/>
+      </svg>
+    </div>
+
+    <!-- Steps Indicator -->
+    <div class="apply-steps fade-up" role="list" aria-label="Form sections">
+      <div class="apply-step active" role="listitem">
+        <div class="step-num">1</div>
+        <span>Your Info</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="apply-step active" role="listitem">
+        <div class="step-num">2</div>
+        <span>Job Details</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="apply-step" role="listitem">
+        <div class="step-num">3</div>
+        <span>Submit</span>
+      </div>
+    </div>
+
+    <div class="apply-container">
+
+      <!-- ERROR BANNER -->
+      <div class="error-banner" id="errorBanner" style="display:none;">
+        <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+        <span id="errorText">Something went wrong.</span>
+        <button type="button" class="error-close" id="errorClose" aria-label="Dismiss error">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+<form id="applicationForm">
+
+  <!-- =========================
+       1. PERSONAL INFO
+  ========================== -->
+  <div class="form-card fade-up" id="card-personal">
+    <div class="form-card-header">
+      <div class="form-card-icon">
+        <i class="fa-solid fa-circle-user"></i>
+      </div>
+      <div>
+        <h2>Personal Information</h2>
+        <p>Basic identity details</p>
+      </div>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>First Name *</label>
+        <input type="text" name="first_name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Middle Name *</label>
+        <input type="text" name="middle_name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Last Name *</label>
+        <input type="text" name="last_name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Date of Birth *</label>
+        <input type="date" name="dob" required>
+      </div>
+
+      <div class="form-group">
+        <label>Place of Birth *</label>
+        <input type="text" name="birth_place" required>
+      </div>
+
+      <div class="form-group">
+        <label>Age *</label>
+        <input type="number" name="age" required>
+      </div>
+
+      <div class="form-group">
+        <label>Height *</label>
+        <input type="text" name="height" required>
+      </div>
+
+      <div class="form-group">
+        <label>Weight *</label>
+        <input type="text" name="weight" required>
+      </div>
+
+      <div class="form-group">
+        <label>Marital Status *</label>
+        <select name="marital_status" required>
+          <option value="">Select</option>
+          <option>Single</option>
+          <option>Married</option>
+          <option>Divorced</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Religion *</label>
+        <select name="religion" required>
+  <option value="">Select religion</option>
+  <option value="Islam">MUSLIM</option>
+  <option value="Christianity">CHRISTIAN</option>
+  <option value="Protestant">PROTESTANT</option>
+  <option value="Catholic">CATHOLIC</option>
+  <option value="Other">Other</option>
+</select>
+      </div>
+
+      <div class="form-group">
+        <label>Nationality *</label>
+        <input type="text" name="nationality" required>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================
+       2. APPLICATION DETAILS
+  ========================== -->
+<div class="form-card fade-up" id="card-application">
+  <div class="form-card-header">
+    <div class="form-card-icon"><i class="fa-solid fa-briefcase"></i></div>
+    <div>
+      <h2>Application Details</h2>
+      <p>Our recruitment team assigns your post, contract, and destination after reviewing your application — no action needed here.</p>
+    </div>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Application Number *</label>
+        <input
+  type="text"
+  name="application_number"
+  readonly
+  class="admin-field"
+/>
+      </div>
+
+      <div class="form-group">
+        <label>Post Applied For *</label>
+        <input type="text" name="post_applied"readonly
+  class="admin-field">
+      </div>
+
+      <div class="form-group">
+        <label>Contract Period *</label>
+        <input type="text" name="contract_period"readonly
+  class="admin-field">
+      </div>
+
+      <div class="form-group">
+        <label>Monthly Salary *</label>
+        <input type="text" name="monthly_salary"readonly
+  class="admin-field">
+      </div>
+
+      <div class="form-group">
+        <label>Education *</label>
+        <input type="text" name="education" readonly
+  class="admin-field">
+      </div>
+
+      <div class="form-group">
+        <label>Destination Country *</label>
+        <select name="country" readonly
+  class="admin-field">
+          <option value="">Select</option>
+          <option>Qatar</option>
+          <option>Saudi Arabia</option>
+          <option>Jordan</option>
+          <option>Dubai</option>
+          <option>Kuwait</option>
+          <option>Europe</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================
+       3. PASSPORT INFO
+  ========================== -->
+  <div class="form-card fade-up">
+    <div class="form-card-header">
+      <div class="form-card-icon">
+        <i class="fa-solid fa-passport"></i>
+      </div>
+      <div>
+        <h2>Passport Information</h2>
+      </div>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Passport Number *</label>
+        <input type="text" name="passport_number" required>
+      </div>
+
+      <div class="form-group">
+        <label>Issue Place *</label>
+        <input type="text" name="issue_place" required>
+      </div>
+
+      <div class="form-group">
+        <label>Issue Date *</label>
+        <input type="date" name="passport_issue_date" required>
+      </div>
+
+      <div class="form-group">
+        <label>Expiry Date *</label>
+        <input type="date" name="passport_expiry" required>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================
+       4. EXPERIENCE + SKILLS
+  ========================== -->
+  <div class="form-card fade-up">
+    <div class="form-card-header">
+      <div class="form-card-icon">
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <div>
+        <h2>Experience & Skills</h2>
+      </div>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Experience Period *</label>
+        <input type="text" name="experience_period" required>
+      </div>
+
+      <div class="form-group">
+        <label>Experience Country *</label>
+        <input type="text" name="experience_country" required>
+      </div>
+
+      <div class="form-group">
+        <label>English *</label>
+      <select name="english" required>
+    <option value="">Select</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+</select>
+      </div>
+
+      <div class="form-group">
+        <label>Arabic *</label>
+        <select name="arabic" required>
+             <option value="">Select</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>French *</label>
+        <select name="french" required>
+              <option value="">Select</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================
+       5. JOB SKILLS
+  ========================== -->
+  <div class="form-card fade-up">
+    <div class="form-card-header">
+      <div class="form-card-icon">
+        <i class="fa-solid fa-hands-helping"></i>
+      </div>
+      <div>
+        <h2>Job Skills</h2>
+      </div>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Care of Elderly *</label>
+        <select name="care_elderly" required>
+            <option value="">Select</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Baby Sitter *</label>
+        <select name="babysitter" required>
+            <option value="">Select</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Cleaning *</label>
+        <select name="cleaning" required>
+            <option value="">Select</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Cooking *</label>
+        <select name="cooking" required>
+             <option value="">Select</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================
+       6. CONTACT
+  ========================== -->
+  <div class="form-card fade-up">
+    <div class="form-card-header">
+      <div class="form-card-icon">
+        <i class="fa-solid fa-phone"></i>
+      </div>
+      <div>
+        <h2>Contact</h2>
+      </div>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Phone *</label>
+        <input type="tel" name="phone" required>
+      </div>
+
+      <div class="form-group">
+        <label>Family Phone *</label>
+        <input type="text" name="family_phone" required>
+      </div>
+
+      <div class="form-group full-width">
+        <label>Note *</label>
+        <textarea name="note" rows="3" required></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================
+       7. UPLOADS
+  ========================== -->
+  <div class="form-card fade-up">
+    <div class="form-card-header">
+      <div class="form-card-icon">
+        <i class="fa-solid fa-upload"></i>
+      </div>
+      <div>
+        <h2>Uploads</h2>
+      </div>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>ID Card *</label>
+        <input type="file" name="idcard">
+      </div>
+
+      <div class="form-group">
+        <label>Portrait *</label>
+        <input type="file" name="portrait" required>
+      </div>
+
+      <div class="form-group">
+        <label>Passport Photo *</label>
+        <input type="file" name="passport" required>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================
+       SUBMIT
+  ========================== -->
+  <div class="form-submit fade-up">
+    <button type="submit" class="btn primary-btn submit-btn">
+      Submit Application
+    </button>
+  </div>
+
+</form>
+    </div>
+  </section>
+
+  <!-- ========== SUCCESS STATE ========== -->
+  <section class="state-panel guest-panel" id="successState" hidden aria-live="polite">
+    <div class="success-card fade-up">
+      <div class="success-icon" aria-hidden="true">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h1>Application Submitted!</h1>
+      <p>
+        Thank you! Our recruitment team will carefully review your application
+        and reach out to you soon.
+      </p>
+      <div class="success-details">
+        <div class="success-detail-item">
+          <i class="fa-solid fa-clock" aria-hidden="true"></i>
+          <span>Typical response time: <strong>2–5 business days</strong></span>
+        </div>
+        <div class="success-detail-item">
+          <i class="fa-solid fa-phone" aria-hidden="true"></i>
+          <span>We'll reach you via your registered contact</span>
+        </div>
+        <div class="success-detail-item">
+          <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+          <span>Track status in <a href="dashboard.html#applications">My Applications</a></span>
+        </div>
+      </div>
+      <div class="guest-actions">
+        <a href="home.html" onclick="window.location.href='home.html'" class="btn secondary-btn">Back to Dashboard</a>
+        <button type="button" class="btn primary-btn" id="applyAgainBtn">Submit Another</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+<footer class="footer">
+  <img src="../assets/images/al segher.png.jpg.webp" alt="AL SEGER Logo" loading="lazy">
+  <h2 data-i18n="footer.companyName">AL SEGER TRADING PLC</h2>
+  <p data-i18n="footer.tagline">Trusted Ethiopian Employment Agency for International Opportunities.</p>
+  <div class="socials">
+    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+  <span data-i18n="footer.copyright">© 2026 AL SEGER TRADING PLC. All Rights Reserved.</span>
+</footer>
+
+
+<!-- JS (same load order as dashboard.html) -->
+<script src="../js/language.js" defer></script>
+<script src="../js/theme.js" defer></script>
+<script src="../js/main.js" defer></script>
+<script src="../js/apply.js" defer></script>
+
+</body>
+</html>

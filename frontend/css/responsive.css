@@ -1,0 +1,275 @@
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+    .nav-links{
+        gap:14px;
+    }
+
+    .nav-links a{
+        font-size:14px;
+    }
+
+}
+
+@media(max-width:992px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 991px) {
+
+  .hero h1 {
+
+    font-size: 52px;
+
+  }
+
+  .about-container,
+  .contact-container {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .nav-links {
+
+    display: none;
+
+  }
+
+  .menu-btn {
+
+    display: block;
+
+  }
+
+  .hero h1 {
+
+    font-size: 42px;
+
+  }
+
+  .hero p {
+
+    font-size: 16px;
+
+  }
+
+  .section-title h2 {
+
+    font-size: 32px;
+
+  }
+
+  .about-text h3 {
+
+    font-size: 28px;
+
+  }
+
+}
+
+@media (max-width:768px){
+
+  .logo-text span{
+      display:none;
+  }
+
+  .logo-text h2{
+      font-size:16px;
+  }
+
+  .logo-area img{
+      width:50px;
+      height:50px;
+  }
+
+  .menu-btn{
+      display:block;
+      flex-shrink:0;
+  }
+
+}
+@media (max-width: 500px) {
+
+  .hero {
+
+    padding-top: 150px;
+
+  }
+
+  .hero h1 {
+
+    font-size: 34px;
+
+  }
+
+  .hero-logo {
+
+    width: 130px;
+
+  }
+
+  .btn {
+
+    width: 100%;
+
+  }
+
+}
+/* ========================= */
+
+@media(max-width:900px){
+
+    .fanos-about{
+        grid-template-columns:1fr;
+    }
+
+    .fanos-hero h1{
+        font-size:3rem;
+    }
+}
+
+@media(max-width:768px){
+
+    .fanos-section{
+        padding:80px 20px;
+    }
+
+    .section-title h2{
+        font-size:2rem;
+    }
+
+    .fanos-hero h1{
+        font-size:2.3rem;
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+  .dashboard-main {
+    padding-top: 130px;
+  }
+
+  .dashboard-welcome h1 {
+    font-size: 28px;
+  }
+
+  .guest-card,
+  .profile-card {
+    padding: 30px 24px;
+  }
+
+  .profile-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .profile-row dd {
+    text-align: left;
+  }
+
+  .guest-actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .announcement-card {
+    flex-direction: column;
+  }
+
+  .action-toast {
+    width: calc(100% - 40px);
+    text-align: center;
+  }
+
+}
+@media (max-width: 360px) {
+  .apply-step span {
+    display: none;
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   14. RESPONSIVE BREAKPOINTS
+   ---------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .apply-hero {
+    padding: 40px 16px 36px;
+  }
+
+  .apply-container {
+    padding: 20px 14px 56px;
+  }
+
+  .form-card {
+    padding: 20px 18px 20px 26px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prefill-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .success-card {
+    padding: 36px 22px;
+    border-radius: 16px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .apply-steps {
+    padding: 14px 16px;
+    top: 64px;
+  }
+
+  .step-line {
+    max-width: 32px;
+  }
+}
+
+@media (max-width: 400px) {
+  .form-card-header {
+    gap: 10px;
+  }
+
+  .form-card-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+    border-radius: 9px;
+  }
+
+  .form-card-header h2 {
+    font-size: 0.92rem;
+  }
+}

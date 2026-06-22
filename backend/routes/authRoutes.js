@@ -3,7 +3,7 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
 const ctrl = require('../controllers/authController');
-const { authenticate } = require('../middleware/auth');
+const { authenticate } = require('../middleware/adminAuth');
 
 const router = Router();
 

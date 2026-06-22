@@ -7,7 +7,7 @@
 
 require('dotenv').config();
 
-console.log("JWT_SECRET =", process.env.JWT_SECRET);
+
 
 const express    = require('express');
 const cors       = require('cors');
@@ -22,9 +22,12 @@ const { errorHandler, notFound } = require('./middleware/errorHandler');
 // ── Route modules ─────────────────────────────────────────────────────────────
 const authRoutes        = require('./routes/authRoutes');
 const applicantRoutes   = require('./routes/applicantRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
 const countryRoutes     = require('./routes/countryRoutes');
 const settingsRoutes    = require('./routes/settingsRoutes');
 const reportRoutes      = require('./routes/reportRoutes');
+const userAuthRoutes    = require('./routes/userAuthRoutes');
+const onlineApplicationRoutes = require('./routes/onlineApplicationRoutes');
 
 const app  = express();
 const PORT = process.env.PORT || 5000;
@@ -100,13 +103,16 @@ app.get('/health', (req, res) => {
 
 // ── API Routes ────────────────────────────────────────────────────────────────
 app.use('/api/auth',        authRoutes);
+app.use('/api/users', userAuthRoutes);
 app.use('/api/applicants',  applicantRoutes);
+app.use('/api/applications', applicationRoutes);
 app.use('/api/countries',   countryRoutes);
 app.use('/api/settings',    settingsRoutes);
 app.use('/api/reports',     reportRoutes);
-
+app.use('/api/applications',        applicationRoutes);
+app.use('/api/online-applications', onlineApplicationRoutes)
 // ── Messages routes (inline — simple enough for direct query) ─────────────────
-const { authenticate } = require('./middleware/auth');
+const { authenticate } = require('./middleware/adminAuth');
 const { query }        = require('./config/db');
 
 const msgRouter = express.Router();
