@@ -19,8 +19,8 @@ async function generateReferenceNumber() {
     [`${prefix}%`]
   );
   if (!row) return `${prefix}0001`;
-  const lastSeq  = parseInt(row.reference_number.split('-')[2], 10);
-  const nextSeq  = String(lastSeq + 1).padStart(4, '0');
+  const lastSeq = parseInt(row.reference_number.split('-')[2], 10);
+  const nextSeq = String(lastSeq + 1).padStart(4, '0');
   return `${prefix}${nextSeq}`;
 }
 
@@ -61,18 +61,18 @@ async function findById(id) {
 }
 
 async function findAll({
-  search   = '',
-  status   = '',
-  gender   = '',
-  country  = '',
-  page     = 1,
-  limit    = 25,
-  sort     = 'applied_at',
-  order    = 'DESC',
+  search  = '',
+  status  = '',
+  gender  = '',
+  country = '',
+  page    = 1,
+  limit   = 25,
+  sort    = 'applied_at',
+  order   = 'DESC',
 } = {}) {
   const safeSorts  = ['applied_at', 'first_name', 'last_name', 'status', 'created_at', 'reference_number'];
   const safeOrders = ['ASC', 'DESC'];
-  const sortCol    = safeSorts.includes(sort)   ? `a.${sort}` : 'a.applied_at';
+  const sortCol    = safeSorts.includes(sort)              ? `a.${sort}` : 'a.applied_at';
   const sortDir    = safeOrders.includes(order.toUpperCase()) ? order.toUpperCase() : 'DESC';
 
   const conditions = [];
@@ -86,9 +86,9 @@ async function findAll({
     const like = `%${search}%`;
     params.push(like, like, like, like, like, like);
   }
-  if (status)  { conditions.push('a.status = ?');                     params.push(status);  }
-  if (gender)  { conditions.push('a.gender = ?');                     params.push(gender);  }
-  if (country) { conditions.push('a.destination_country_id = ?');     params.push(country); }
+  if (status)  { conditions.push('a.status = ?');                 params.push(status);  }
+  if (gender)  { conditions.push('a.gender = ?');                 params.push(gender);  }
+  if (country) { conditions.push('a.destination_country_id = ?'); params.push(country); }
 
   const where  = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const offset = (Math.max(1, page) - 1) * limit;
@@ -135,6 +135,7 @@ async function findByReferenceNumber(ref) {
 async function create(data) {
   const ref = await generateReferenceNumber();
 
+  // ── These must stay in lock-step with the values[] array below ──────────────
   const fields = [
     'reference_number', 'first_name', 'last_name', 'email', 'phone',
     'date_of_birth', 'gender', 'nationality', 'national_id',
@@ -145,18 +146,43 @@ async function create(data) {
     'status', 'admin_notes',
   ];
 
+  // ── Every slot uses ?? null so undefined can NEVER reach mysql2 ──────────────
+  // Rule: use ?? null for nullable fields, || for fields that need a real default.
   const values = [
-    ref,
-    data.first_name, data.last_name, data.email || null, data.phone || null,
-    data.date_of_birth || null, data.gender, data.nationality || null,
-    data.national_id || null, data.passport_number || null, data.passport_expiry || null,
-    data.destination_country_id || null, data.origin_country_id || null,
-    data.education || 'none', data.experience_years || 0,
-    data.languages || null, data.skills || null,
-    data.address || null, data.emergency_contact_name || null,
-    data.emergency_contact_phone || null,
-    data.status || 'pending', data.admin_notes || null,
+    ref,                                        // auto-generated — ignores data.reference_number
+    data.first_name             ?? null,
+    data.last_name              ?? null,
+    data.email                  ?? null,
+    data.phone                  ?? null,
+    data.date_of_birth          ?? null,        // caller must map 'dob' → 'date_of_birth' before calling
+    data.gender                 ?? null,        // ← ROOT CAUSE WAS HERE: was `data.gender` (no fallback)
+    data.nationality            ?? null,
+    data.national_id            ?? null,
+    data.passport_number        ?? null,
+    data.passport_expiry        ?? null,
+    data.destination_country_id ?? null,        // must be integer FK or null — never a country name string
+    data.origin_country_id      ?? null,
+    data.education              || 'none',      // || intentional: empty string → 'none'
+    data.experience_years       ?? 0,
+    data.languages              ?? null,
+    data.skills                 ?? null,
+    data.address                ?? null,
+    data.emergency_contact_name  ?? null,
+    data.emergency_contact_phone ?? null,
+    data.status                 || 'pending',   // || intentional: empty string → 'pending'
+    data.admin_notes            ?? null,
   ];
+
+  // ── Last-resort guard: throw here with a useful message instead of letting
+  //    mysql2 throw a cryptic "Bind parameters must not contain undefined" ──────
+  fields.forEach((field, i) => {
+    if (values[i] === undefined) {
+      throw new Error(
+        `[Applicant.create] undefined at fields[${i}] = "${field}". ` +
+        'The caller must pass null explicitly for missing fields.'
+      );
+    }
+  });
 
   const placeholders = fields.map(() => '?').join(', ');
   const result = await query(
@@ -217,7 +243,6 @@ async function updateStatus(id, status, extra = {}) {
 }
 
 async function remove(id) {
-  // Documents cascade-deleted via FK
   await query(`DELETE FROM applicants WHERE id = ?`, [id]);
 }
 
@@ -232,7 +257,6 @@ async function getDocuments(applicantId) {
 }
 
 async function upsertDocument({ applicant_id, document_type, file_path, file_name, file_size, mime_type }) {
-  // Remove old record first so we get a fresh uploadedAt
   await query(
     `DELETE FROM applicant_documents WHERE applicant_id = ? AND document_type = ?`,
     [applicant_id, document_type]
@@ -262,9 +286,7 @@ async function deleteDocument(applicantId, documentType) {
 // ── Statistics ────────────────────────────────────────────────────────────────
 
 async function getStatusCounts() {
-  return query(
-    `SELECT status, COUNT(*) AS count FROM applicants GROUP BY status`
-  );
+  return query(`SELECT status, COUNT(*) AS count FROM applicants GROUP BY status`);
 }
 
 async function getCountryBreakdown() {

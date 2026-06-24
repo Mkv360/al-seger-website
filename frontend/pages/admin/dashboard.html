@@ -117,29 +117,65 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <p>Recruitment Management System</p>
 
       </div>
+      <div class="top-actions"></div>
+<div class="notification" id="notifBell">
+  <i class="fa-solid fa-bell"></i>
+  <span class="badge" id="notifCount">5</span>
 
-      <div class="topbar-right">
+  <div class="notif-panel" id="notifPanel">
+    <h4>Notifications</h4>
 
-        <div class="notification">
+    <div class="notif-item">New applicant submitted</div>
+    <div class="notif-item">Application approved</div>
+    <div class="notif-item">System update available</div>
+  </div>
+</div>
+<div class="admin-profile" id="adminProfile">
 
-          <i class="fa-solid fa-bell"></i>
+  <!-- AVATAR WRAPPER -->
+  <div class="avatar-wrapper">
+    <img id="adminAvatar" class="avatar-img" alt="Admin">
 
-          <span>5</span>
+    <!-- fallback icon -->
+    <div id="avatarFallback" class="avatar-fallback">
+      <i class="fa-solid fa-user"></i>
+    </div>
+  </div>
 
-        </div>
+  <div class="admin-info">
+    <h4 id="adminName">Administrator</h4>
+    <span id="adminRole">Super Admin</span>
+  </div>
 
-        <div class="admin-profile">
+  <i class="fa-solid fa-chevron-down"></i>
 
-         <img src="../../assets/images/logo.jpeg" alt="Logo">
+  <!-- DROPDOWN -->
+  <div class="profile-dropdown" id="profileDropdown">
 
-          <div>
-            <h4>Administrator</h4>
-            <span>Super Admin</span>
-          </div>
+<div class="dropdown-header">
 
-        </div>
+  <div class="avatar-wrapper small">
+    <img id="ddAvatar" class="avatar-img" alt="Admin">
+    <div id="ddFallback" class="avatar-fallback small">
+      <i class="fa-solid fa-user"></i>
+    </div>
+  </div>
 
-      </div>
+  <div class="admin-meta">
+    <div class="admin-name" id="ddName">Administrator</div>
+    <div class="admin-role" id="ddRole">Super Admin</div>
+  </div>
+
+</div>
+
+    <hr>
+
+<button onclick="openProfileModal()">My Profile</button>
+    <button>Settings</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+</div>
 
     </div>
 
@@ -246,8 +282,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   </main>
 
 </div>
+
 <script src="../../js/admin-auth.js"></script>
 <script src="../../js/admin.js"></script>
-<script src="../../js/applicant.js"></script>
+<script src="../../js/profile.js"></script>
+<script src="../../js/adminManagement.js"></script>
 </body>
 </html>

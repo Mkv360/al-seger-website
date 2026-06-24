@@ -6,13 +6,16 @@ const fs   = require('fs');
 const Application = require('../models/Application');
 const Applicant   = require('../models/Applicant');
 const { deleteFile, UPLOAD_ROOT } = require('../config/multer');
+const { queryOne } = require('../config/db'); // ← added: needed for country lookup
+
 const ASSIGNMENT_FIELDS = [
   ['post_applied_for', 'Post Applied For'],
-  ['contract_period', 'Contract Period'],
-  ['monthly_salary', 'Monthly Salary'],
-  ['education', 'Education'],
+  ['contract_period',  'Contract Period'],
+  ['monthly_salary',   'Monthly Salary'],
+  ['education',        'Education'],
   ['destination_country', 'Destination Country'],
 ];
+
 const toAbsolute = (rel) => (rel ? path.join(UPLOAD_ROOT, rel) : null);
 
 function generateApplicationNumber(id) {
@@ -21,9 +24,49 @@ function generateApplicationNumber(id) {
 }
 
 function mimeFromExt(filePath) {
-  const map = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.pdf': 'application/pdf' };
+  const map = {
+    '.jpg':  'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.png':  'image/png',
+    '.webp': 'image/webp',
+    '.pdf':  'application/pdf',
+  };
   return map[path.extname(filePath).toLowerCase()] || 'application/octet-stream';
 }
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+/**
+ * Resolve a country name (e.g. 'Qatar') → integer PK in countries table.
+ * Returns null if name is empty or no matching row is found.
+ * Never returns undefined.
+ */
+async function resolveCountryId(name) {
+  if (!name || typeof name !== 'string') return null;
+  const row = await queryOne(
+    'SELECT id FROM countries WHERE name = ? LIMIT 1',
+    [name.trim()]
+  );
+  return row ? row.id : null;
+}
+
+/**
+ * Scan a flat payload object and throw a descriptive error listing
+ * every key whose value is still `undefined`.
+ * Call this immediately before Applicant.create() as a last-resort guard.
+ */
+function assertNoUndefined(label, payload) {
+  const bad = Object.entries(payload)
+    .filter(([, v]) => v === undefined)
+    .map(([k]) => k);
+  if (bad.length) {
+    throw new Error(
+      `[${label}] undefined value for: ${bad.join(', ')}. Pass null explicitly.`
+    );
+  }
+}
+
+// ── Handlers ──────────────────────────────────────────────────────────────────
 
 async function getAll(req, res, next) {
   try {
@@ -42,7 +85,6 @@ async function getOne(req, res, next) {
   } catch (err) { next(err); }
 }
 
-// PATCH /:id/assign — office fills in job-matching fields before approval
 async function assignDetails(req, res, next) {
   try {
     const id = parseInt(req.params.id, 10);
@@ -65,119 +107,165 @@ async function assignDetails(req, res, next) {
   } catch (err) { next(err); }
 }
 
-// PATCH /:id/approve — validates assignment is complete, then promotes to Applicant
 async function approveApplication(req, res, next) {
   try {
     const id = parseInt(req.params.id, 10);
-    if (isNaN(id)) return res.status(400).json({ success: false, message: 'Invalid id.' });
+    if (isNaN(id)) {
+      return res.status(400).json({ success: false, message: 'Invalid id.' });
+    }
 
+    // 1. Load
     const application = await Application.findById(id);
-    if (!application) return res.status(404).json({ success: false, message: 'Application not found.' });
+    if (!application) {
+      return res.status(404).json({ success: false, message: 'Application not found.' });
+    }
+
     if (application.status === 'approved') {
       return res.status(409).json({ success: false, message: 'Already approved.' });
     }
 
-    const b = req.body || {};
-    const merged = { ...application };
-    for (const [field] of ASSIGNMENT_FIELDS) {
-      if (b[field] !== undefined && b[field] !== null && b[field] !== '') {
-  merged[field] = b[field].toString().trim();
+    // 2. Merge admin input
+// ── Merge admin data safely ─────────────────────────────
+const b = req.body || {};
+const merged = {
+  first_name: application.first_name,
+  last_name: application.last_name,
+  email: application.email,
+  phone: application.phone,
+  dob: application.dob,
+  nationality: application.nationality,
+  national_id: application.national_id,
+  passport_number: application.passport_number,
+  passport_expiry: application.passport_expiry,
+  education: application.education,
+  experience_years: application.experience_years,
+  languages: application.languages,
+  skills: application.skills,
+  address: application.address,
+  emergency_contact_name: application.emergency_contact_name,
+  emergency_contact_phone: application.emergency_contact_phone,
+  portrait_path: application.portrait_path,
+  passport_path: application.passport_path,
+  idcard_path: application.idcard_path,
+};
+
+// accept both naming styles to prevent frontend mismatch bugs
+for (const [field] of ASSIGNMENT_FIELDS) {
+  const value = b[field];
+
+  if (value !== undefined && value !== null && value !== '') {
+    merged[field] = String(value).trim();
+  }
 }
-    }
-    if (!merged.application_number) merged.application_number = generateApplicationNumber(id);
+// generate application number if missing
+if (!merged.application_number) {
+  merged.application_number = generateApplicationNumber(id);
+}
 
-    const missing = ASSIGNMENT_FIELDS.filter(([f]) => !merged[f]).map(([, label]) => label);
-    if (missing.length) {
-      return res.status(400).json({
-        success: false,
-        message: `Cannot approve — missing: ${missing.join(', ')}.`,
-      });
-    }
+// ── Validate assignment fields properly ─────────────────
+const missing = ASSIGNMENT_FIELDS
+  .filter(([f]) => {
+    const v = merged[f];
+    return v === undefined || v === null || String(v).trim() === '';
+  })
+  .map(([, label]) => label);
 
+    // 4. Save back to applications table (ONLY assignment fields)
     await Application.updateAssignment(id, {
       application_number: merged.application_number,
-      post_applied:        merged.post_applied,
-      contract_period:     merged.contract_period,
-      monthly_salary:      merged.monthly_salary,
-      education:           merged.education,
-      country:             merged.country,
+      post_applied_for: merged.post_applied_for,
+      contract_period: merged.contract_period,
+      monthly_salary: merged.monthly_salary,
+      education: merged.education,
+      destination_country: merged.destination_country,
     });
 
-    // ⚠ ASSUMPTION — confirm column names against models/Applicant.js.
-    // `gender` isn't collected anywhere yet; decide whether to add it to
-    // the public form or leave nullable on Applicant.
-    console.log("APPLICANT DATA:", {
-  destination_country: merged.destination_country,
-  post_applied_for: merged.post_applied_for,
-});
-const applicant = await Applicant.create({
-  first_name: merged.first_name || null,
-  middle_name: merged.middle_name || null,
-  last_name: merged.last_name || null,
-  dob: merged.dob || null,
-  birth_place: merged.birth_place || null,
-  age: merged.age || null,
-  height: merged.height || null,
-  weight: merged.weight || null,
-  marital_status: merged.marital_status || null,
-  religion: merged.religion || null,
-  nationality: merged.nationality || null,
+    // 5. Resolve country
+    const destinationCountryId = await resolveCountryId(merged.destination_country);
 
-  // IMPORTANT FIX HERE
-  destination_country_id: merged.destination_country || null,
+    // 6. Create applicant (CLEAN MAPPING ONLY)
+const applicantPayload = {
+  first_name: merged.first_name ?? null,
+  last_name: merged.last_name ?? null,
+  email: merged.email ?? null,
+  phone: merged.phone ?? null,
 
-  post_applied: merged.post_applied_for || null,
-  contract_period: merged.contract_period || null,
-  monthly_salary: merged.monthly_salary || null,
-  education: merged.education || null,
+  date_of_birth: merged.dob || application.date_of_birth || null,
+  gender: null,
 
-  passport_number: merged.passport_number || null,
-  issue_place: merged.issue_place || null,
-  passport_issue_date: merged.passport_issue_date || null,
-  passport_expiry: merged.passport_expiry || null,
+  nationality: merged.nationality ?? null,
+  national_id: merged.national_id ?? null,
 
-  experience_period: merged.experience_period || null,
-  experience_country: merged.experience_country || null,
+  passport_number: merged.passport_number ?? null,
+  passport_expiry: merged.passport_expiry ?? null,
 
-  phone: merged.phone || null,
-  family_phone: merged.family_phone || null,
-  note: merged.note || null,
+  destination_country_id: destinationCountryId ?? null,
+  origin_country_id: null,
 
-  reference_number: merged.application_number || null,
-  user_id: merged.user_id || null,
+  education: merged.education ?? null,
+  experience_years: merged.experience_years ?? null,
+
+  languages: merged.languages ?? null,
+  skills: merged.skills ?? null,
+
+  address: merged.address ?? null,
+  emergency_contact_name: merged.emergency_contact_name ?? null,
+  emergency_contact_phone: merged.emergency_contact_phone ?? null,
+
   status: 'pending',
+  admin_notes: null,
+};
+Object.entries(applicantPayload).forEach(([k, v]) => {
+  if (v === undefined) {
+    throw new Error(`Undefined detected in applicantPayload.${k}`);
+  }
 });
+    assertNoUndefined('Applicant.create', applicantPayload);
+
+    const applicant = await Applicant.create(applicantPayload);
+
+    // 7. Copy documents
     const docs = [
       ['portrait', merged.portrait_path],
       ['passport', merged.passport_path],
-      ['idcard',   merged.idcard_path],
+      ['idcard', merged.idcard_path],
     ];
-    for (const [docType, rel] of docs) {
+
+    for (const [type, rel] of docs) {
       if (!rel) continue;
+
       const abs = toAbsolute(rel);
       if (!fs.existsSync(abs)) continue;
+
       const stat = fs.statSync(abs);
+
       await Applicant.upsertDocument({
-        applicant_id:  applicant.id,
-        document_type: docType,
-        file_path:     abs,
-        file_name:     path.basename(abs),
-        file_size:     stat.size,
-        mime_type:     mimeFromExt(abs),
+        applicant_id: applicant.id,
+        document_type: type,
+        file_path: abs,
+        file_name: path.basename(abs),
+        file_size: stat.size,
+        mime_type: mimeFromExt(abs),
       });
     }
 
+    // 8. Finalize
     await Application.updateStatus(id, 'approved');
     await Application.linkApplicant(id, applicant.id);
 
     return res.status(200).json({
       success: true,
-      message: `Approved and moved to Applicants (${applicant.reference_number || applicant.id}).`,
-      data: { application_id: id, applicant_id: applicant.id },
+      message: 'Approved successfully.',
+      data: {
+        application_id: id,
+        applicant_id: applicant.id,
+      },
     });
-  } catch (err) { next(err); }
-}
 
+  } catch (err) {
+    next(err);
+  }
+}
 async function rejectApplication(req, res, next) {
   try {
     const id = parseInt(req.params.id, 10);
@@ -205,4 +293,11 @@ async function deleteApplication(req, res, next) {
   } catch (err) { next(err); }
 }
 
-module.exports = { getAll, getOne, assignDetails, approveApplication, rejectApplication, deleteApplication };
+module.exports = {
+  getAll,
+  getOne,
+  assignDetails,
+  approveApplication,
+  rejectApplication,
+  deleteApplication,
+};

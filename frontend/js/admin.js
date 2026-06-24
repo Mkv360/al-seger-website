@@ -131,3 +131,54 @@ document.addEventListener("DOMContentLoaded", () => {
     </tr>
   `).join("");
 });
+const profile = document.getElementById("adminProfile");
+const dropdown = document.getElementById("profileDropdown");
+
+profile.addEventListener("click", () => {
+  dropdown.classList.toggle("active");
+});
+
+// close when clicking outside
+document.addEventListener("click", (e) => {
+  if (!profile.contains(e.target)) {
+    dropdown.classList.remove("active");
+  }
+});
+const admin = {
+  name: "Administrator",
+  role: "Super Admin",
+  avatar: null // or URL
+};
+
+const adminAvatar = document.getElementById("adminAvatar");
+const ddAvatar = document.getElementById("ddAvatar");
+
+const avatarFallback = document.getElementById("avatarFallback");
+const ddFallback = document.getElementById("ddFallback");
+
+function setAvatar(imgUrl) {
+  const hasImage = imgUrl && imgUrl.trim() !== "";
+
+  if (hasImage) {
+    adminAvatar.src = imgUrl;
+    ddAvatar.src = imgUrl;
+
+    adminAvatar.style.display = "block";
+    ddAvatar.style.display = "block";
+
+    avatarFallback.style.display = "none";
+    ddFallback.style.display = "none";
+  } else {
+    adminAvatar.style.display = "none";
+    ddAvatar.style.display = "none";
+
+    avatarFallback.style.display = "flex";
+    ddFallback.style.display = "flex";
+  }
+}
+const bell = document.getElementById("notifBell");
+const panel = document.getElementById("notifPanel");
+
+bell.addEventListener("click", () => {
+  panel.classList.toggle("active");
+});

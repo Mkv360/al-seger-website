@@ -1,40 +1,44 @@
 /**
  * server.js
  * Al-Seger Recruitment Management System — Express API Server
+ *
+ * CHANGES FROM ORIGINAL:
+ *   - Added profileRoutes import
+ *   - Mounted /api/profile
+ *   - Removed duplicate app.use('/api/applications', applicationRoutes) (was mounted twice)
  */
 
 'use strict';
 
 require('dotenv').config();
 
+const express   = require('express');
+const cors      = require('cors');
+const helmet    = require('helmet');
+const morgan    = require('morgan');
+const path      = require('path');
+const rateLimit = require('express-rate-limit');
 
-
-const express    = require('express');
-const cors       = require('cors');
-const helmet     = require('helmet');
-const morgan     = require('morgan');
-const path       = require('path');
-const rateLimit  = require('express-rate-limit');
-
-const { testConnection } = require('./config/db');
-const { errorHandler, notFound } = require('./middleware/errorHandler');
+const { testConnection }          = require('./config/db');
+const { errorHandler, notFound }  = require('./middleware/errorHandler');
 
 // ── Route modules ─────────────────────────────────────────────────────────────
-const authRoutes        = require('./routes/authRoutes');
-const applicantRoutes   = require('./routes/applicantRoutes');
-const applicationRoutes = require('./routes/applicationRoutes');
-const countryRoutes     = require('./routes/countryRoutes');
-const settingsRoutes    = require('./routes/settingsRoutes');
-const reportRoutes      = require('./routes/reportRoutes');
-const userAuthRoutes    = require('./routes/userAuthRoutes');
+const authRoutes              = require('./routes/authRoutes');
+const applicantRoutes         = require('./routes/applicantRoutes');
+const applicationRoutes       = require('./routes/applicationRoutes');
+const countryRoutes           = require('./routes/countryRoutes');
+const settingsRoutes          = require('./routes/settingsRoutes');
+const reportRoutes            = require('./routes/reportRoutes');
+const userAuthRoutes          = require('./routes/userAuthRoutes');
 const onlineApplicationRoutes = require('./routes/onlineApplicationRoutes');
-
+const profileRoutes           = require('./routes/profileRoutes'); // ← NEW
+const adminManagementRoutes = require('./routes/adminManagementRoutes');
 const app  = express();
 const PORT = process.env.PORT || 5000;
 
 // ── Security headers ──────────────────────────────────────────────────────────
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: 'cross-origin' }, // Allow images to be served cross-origin
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
@@ -42,15 +46,14 @@ const corsOptions = {
   origin(origin, callback) {
     const whitelist = [
       process.env.FRONTEND_URL || 'http://localhost:3000',
-      'http://localhost:5500',   // Live Server (VSCode)
+      'http://localhost:5500',
       'http://127.0.0.1:5500',
       'http://localhost:5000',
     ];
-    // Allow requests with no origin (curl, mobile apps, same-origin)
     if (!origin || whitelist.includes(origin)) {
       callback(null, true);
     } else if (process.env.NODE_ENV === 'development') {
-      callback(null, true); // Allow all in dev
+      callback(null, true);
     } else {
       callback(new Error('CORS policy violation'));
     }
@@ -64,8 +67,8 @@ app.options('*', cors(corsOptions));
 
 // ── Global rate limiting ──────────────────────────────────────────────────────
 app.use(rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10),
-  max:      parseInt(process.env.RATE_LIMIT_MAX || '100', 10),
+  windowMs:        parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10),
+  max:             parseInt(process.env.RATE_LIMIT_MAX       || '100',    10),
   standardHeaders: true,
   legacyHeaders:   false,
   message: { success: false, message: 'Too many requests. Please slow down.' },
@@ -102,16 +105,17 @@ app.get('/health', (req, res) => {
 });
 
 // ── API Routes ────────────────────────────────────────────────────────────────
-app.use('/api/auth',        authRoutes);
-app.use('/api/users', userAuthRoutes);
-app.use('/api/applicants',  applicantRoutes);
-app.use('/api/applications', applicationRoutes);
-app.use('/api/countries',   countryRoutes);
-app.use('/api/settings',    settingsRoutes);
-app.use('/api/reports',     reportRoutes);
-app.use('/api/applications',        applicationRoutes);
-app.use('/api/online-applications', onlineApplicationRoutes)
-// ── Messages routes (inline — simple enough for direct query) ─────────────────
+app.use('/api/auth',                authRoutes);
+app.use('/api/users',               userAuthRoutes);
+app.use('/api/applicants',          applicantRoutes);
+app.use('/api/applications',        applicationRoutes); // single mount (duplicate removed)
+app.use('/api/countries',           countryRoutes);
+app.use('/api/settings',            settingsRoutes);
+app.use('/api/reports',             reportRoutes);
+app.use('/api/online-applications', onlineApplicationRoutes);
+app.use('/api/profile',             profileRoutes); // ← NEW
+app.use('/api/admin-management', adminManagementRoutes);
+// ── Messages routes (inline) ──────────────────────────────────────────────────
 const { authenticate } = require('./middleware/adminAuth');
 const { query }        = require('./config/db');
 
@@ -120,15 +124,13 @@ msgRouter.use(authenticate);
 
 msgRouter.get('/', async (req, res, next) => {
   try {
-    const page   = Math.max(1, parseInt(req.query.page || '1', 10));
+    const page   = Math.max(1, parseInt(req.query.page  || '1',  10));
     const limit  = Math.min(parseInt(req.query.limit || '20', 10), 100);
     const offset = (page - 1) * limit;
     const unread = req.query.unread === 'true';
-
     const where  = unread ? 'WHERE is_read = 0' : '';
     const [rows, total] = await Promise.all([
-      query(`SELECT * FROM messages ${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`,
-        [limit, offset]),
+      query(`SELECT * FROM messages ${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`, [limit, offset]),
       query(`SELECT COUNT(*) AS cnt FROM messages ${where}`),
     ]);
     res.json({ success: true, data: rows, total: total[0]?.cnt || 0, page, limit });
@@ -243,4 +245,4 @@ startServer().catch((err) => {
   process.exit(1);
 });
 
-module.exports = app; // For testing
+module.exports = app;

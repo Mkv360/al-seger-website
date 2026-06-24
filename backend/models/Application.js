@@ -29,7 +29,7 @@ class Application {
         marital_status, religion, nationality,
 
         -- Application details
-        application_number, post_applied, contract_period, monthly_salary, education, country,
+        application_number, post_applied, contract_period, monthly_salary, education, destination_country,
 
         -- Passport
         passport_number, issue_place, passport_issue_date, passport_expiry,
@@ -84,11 +84,11 @@ class Application {
       data.nationality,            // 12
 
       data.application_number,     // 13
-      data.post_applied,           // 14
-      data.contract_period,        // 15
+      data.post_applied_for,,           // 14
+      data.destination_country, // was country      // 15
       data.monthly_salary,         // 16
       data.education,              // 17
-      data.country,                // 18
+      data.destination_country,    // 18
 
       data.passport_number,        // 19
       data.issue_place,            // 20
@@ -137,10 +137,14 @@ class Application {
   // ADMIN SIDE
   // ═══════════════════════════════════════════════════════════════
 
-  static async findAll() {
-    return await query(`SELECT * FROM applications ORDER BY created_at DESC`);
-  }
-
+static async findAll() {
+  return await query(
+    `SELECT *
+     FROM applications
+     WHERE status = 'pending'
+     ORDER BY created_at DESC`
+  );
+}
   static async findById(id) {
     const rows = await query(`SELECT * FROM applications WHERE id = ?`, [id]);
     return rows[0] || null;
@@ -155,7 +159,22 @@ class Application {
     return await query(`DELETE FROM applications WHERE id = ?`, [id]);
   }
   static async updateAssignment(id, fields) {
-  const allowed = ['application_number','post_applied','contract_period','monthly_salary','education','country'];
+    await Application.updateAssignment(id, {
+  application_number: merged.application_number,
+  post_applied_for: merged.post_applied_for,
+  contract_period: merged.contract_period,
+  monthly_salary: merged.monthly_salary,
+  education: merged.education,
+  destination_country: merged.destination_country,
+});
+  const allowed = [
+  'application_number',
+  'post_applied_for',
+  'contract_period',
+  'monthly_salary',
+  'education',
+  'destination_country'
+];
   const keys = Object.keys(fields).filter(k => allowed.includes(k) && fields[k] !== undefined);
   if (!keys.length) return this.findById(id);
   const sql = `UPDATE applications SET ${keys.map(k => `${k} = ?`).join(', ')} WHERE id = ?`;

@@ -49,7 +49,7 @@ async function login(e) {
   e.preventDefault();
 
   const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const password = document.getElementById("password").value;
 
  
 
